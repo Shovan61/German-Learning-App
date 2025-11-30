@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Verb {
+  id              Int              @id @default(autoincrement())
+  englishVerb     String
+  englishSentence String
+  present         Present[]
+  presentPerfect  PresentPerfect[]
+  past            Past[]
+  pastPerfect     PastPerfect[]
+  future          Future[]
+  futurePerfect   FuturePerfect[]
+}
+
+model Present {
+  id             Int    @id @default(autoincrement())
+  verbId         Int
+  germanVerb     String
+  germanSentence String
+  verb           Verb   @relation(fields: [verbId], references: [id])
+  audio          String
+}
+
+model PresentPerfect {
+  id             Int    @id @default(autoincrement())
+  verbId         Int
+  germanVerb     String
+  germanSentence String
+  verb           Verb   @relation(fields: [verbId], references: [id])
+  audio          String
+}
+
+model Past {
+  id             Int    @id @default(autoincrement())
+  verbId         Int
+  germanVerb     String
+  germanSentence String
+  verb           Verb   @relation(fields: [verbId], references: [id])
+  audio          String
+}
+
+model PastPerfect {
+  id             Int    @id @default(autoincrement())
+  verbId         Int
+  germanVerb     String
+  germanSentence String
+  verb           Verb   @relation(fields: [verbId], references: [id])
+  audio          String
+}
+
+model Future {
+  id             Int    @id @default(autoincrement())
+  verbId         Int
+  germanVerb     String
+  germanSentence String
+  verb           Verb   @relation(fields: [verbId], references: [id])
+  audio          String
+}
+
+model FuturePerfect {
+  id             Int    @id @default(autoincrement())
+  verbId         Int
+  germanVerb     String
+  germanSentence String
+  verb           Verb   @relation(fields: [verbId], references: [id])
+  audio          String
+}
