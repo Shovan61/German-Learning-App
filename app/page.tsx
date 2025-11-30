@@ -1,10 +1,9 @@
-import Image from "next/image";
-import { Button, Card } from "antd";
+import Main from "@/components/main";
 
 export default function Home() {
   return (
-    <Card>
-      <Button type="primary">Button</Button>{" "}
-    </Card>
+    <div className="flex h-screen p-1 md:p-6">
+      <Main />
+    </div>
   );
 }
