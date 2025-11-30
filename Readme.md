@@ -1,6 +1,6 @@
 A German Learning Application For Personal learning
 
--Verb usage with sentence
+- Verb usage with sentence
 - Audio
 
 Tech:
