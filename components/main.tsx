@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Modal } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import axiosInstance from "@/lib/axios";
+import UploadAudio from "./UploadAudio";
 
 function Main() {
   const [dataSource, setdataSource] = useState([]);
@@ -61,7 +62,7 @@ function Main() {
           </Button>,
         ]}
       >
-        <p>Some contents...</p>
+        <UploadAudio />
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
