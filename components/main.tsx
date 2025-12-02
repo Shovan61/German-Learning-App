@@ -6,10 +6,13 @@ import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
 
 function Main() {
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [dataSource, setdataSource] = useState([]);
   const [open, setOpen] = useState(false);
   const [isTableLoading, setisTableLoading] = useState(false);
   const [isModalLoading, setisModalLoading] = useState(false);
+
+  console.log(audioUrl, "audio Url");
 
   const getListData = async () => {
     try {
@@ -62,7 +65,7 @@ function Main() {
           </Button>,
         ]}
       >
-        <UploadAudio />
+        <UploadAudio audioUrl={audioUrl} setAudioUrl={setAudioUrl} />
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>

@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import { InboxOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
-import type { UploadProps } from 'antd';
+import React, { useState } from "react";
+import { InboxOutlined, DeleteFilled } from "@ant-design/icons";
+import { message, Upload } from "antd";
+import type { UploadProps } from "antd";
 
 const { Dragger } = Upload;
 
-const UploadAudio: React.FC = () => {
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+type UploadAudioProps = {
+  audioUrl: string | null;
+  setAudioUrl: (audioUrl: string | null) => void;
+};
 
+const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
   const props: UploadProps = {
-    name: 'file',
-    multiple: false, // Limit to a single file upload
-    accept: '.mp3', // Only accept MP3 files
-    action: '/api/upload-audio', // The API route to handle file upload
+    name: "file",
+    multiple: false,
+    accept: ".mp3",
+    action: "/api/upload-audio",
     beforeUpload(file) {
       // Check if the file is an MP3 file
-      if (file.type !== 'audio/mp3') {
+
+      if (!file.type.includes("audio")) {
         message.error(`${file.name} is not a valid MP3 file.`);
         return Upload.LIST_IGNORE; // Prevent file upload
       }
@@ -26,44 +30,54 @@ const UploadAudio: React.FC = () => {
       const status = file.status;
       const response = file.response;
 
-      if (status === 'uploading') {
-        console.log('Uploading:', file.name);
+      if (status === "uploading") {
+        console.log("Uploading:", file.name);
       }
 
-      if (status === 'done') {
+      if (status === "done") {
         message.success(`${file.name} file uploaded successfully.`);
         if (response?.audioUrl) {
           setAudioUrl(response.audioUrl); // Store the audio URL
         }
-      } else if (status === 'error') {
+      } else if (status === "error") {
         message.error(`${file.name} file upload failed.`);
       }
     },
     onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
+      console.log("Dropped files", e.dataTransfer.files);
     },
   };
 
   return (
     <div>
       <h2>Upload MP3 Audio File</h2>
-      <Dragger {...props}>
+      <Dragger {...props} disabled={audioUrl !== null}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">Click or drag an MP3 file to this area to upload</p>
+        <p className="ant-upload-text">
+          Click or drag an MP3 file to this area to upload
+        </p>
         <p className="ant-upload-hint">
-          Support for a single MP3 file upload only. Please make sure the file is in MP3 format.
+          Support for a single MP3 file upload only. Please make sure the file
+          is in MP3 format.
         </p>
       </Dragger>
 
       {audioUrl && (
-        <div style={{ marginTop: '20px' }}>
-          <h3>Uploaded Audio:</h3>
-          <audio controls>
-            <source src={audioUrl} type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
+        <div className="flex gap-2 items-center">
+          <div style={{ marginTop: "20px" }}>
+            <h3 className="font-semibold ml-2 mb-2">Uploaded Audio:</h3>
+            <audio controls>
+              <source src={audioUrl} type="audio/mp3" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+          <DeleteFilled
+            color="red"
+            className="cursor-pointer text-rose-500"
+            onClick={() => setAudioUrl(null)}
+          />
         </div>
       )}
     </div>

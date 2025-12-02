@@ -25,7 +25,7 @@ const uploadAudio = (req, res) => {
       return res.status(500).json({ error: 'Error during file upload' });
     }
 
-    const audioFile = files.audio[0]; // Access the uploaded file
+    const audioFile = files.audio[0]; 
 
     try {
       // Upload to Cloudinary
