@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InboxOutlined, DeleteFilled } from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
 import type { UploadProps } from "antd";
 
@@ -51,7 +51,7 @@ const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
   return (
     <div>
       <h2>Upload MP3 Audio File</h2>
-      <Dragger {...props} disabled={audioUrl !== null}>
+      <Dragger {...props} maxCount={1}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
@@ -73,11 +73,6 @@ const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
               Your browser does not support the audio element.
             </audio>
           </div>
-          <DeleteFilled
-            color="red"
-            className="cursor-pointer text-rose-500"
-            onClick={() => setAudioUrl(null)}
-          />
         </div>
       )}
     </div>
