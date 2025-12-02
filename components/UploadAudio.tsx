@@ -46,11 +46,14 @@ const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
     },
+    onRemove(e) {
+      setAudioUrl(null);
+      console.log(e);
+    },
   };
 
   return (
     <div>
-      <h2>Upload MP3 Audio File</h2>
       <Dragger {...props} maxCount={1}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
