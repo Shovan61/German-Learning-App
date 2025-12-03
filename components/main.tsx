@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -11,12 +12,11 @@ import {
   Divider,
   message,
   Spin,
-  Table,
 } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
-import NestedTable from "./test";
+import VerbTable from "./table";
 
 export type FieldType = {
   verb: string;
@@ -59,18 +59,8 @@ function Main() {
   const [audioUrlForFuturePerfect, setAudioUrlForFuturePerfect] = useState<
     string | null
   >(null);
-  // const [dataSource, setdataSource] = useState([]);
-  const dataSource = Array.from({ length: 100 }).map((_, i) => ({
-    key: i,
-    name: "John Brown",
-    age: i + 1,
-    street: "Lake Park",
-    building: "C",
-    number: 2035,
-    companyAddress: "Lake Street 42",
-    companyName: "SoftLake Co",
-    gender: "M",
-  }));
+  const [dataSource, setdataSource] = useState([]);
+
   const [open, setOpen] = useState(false);
   const [isTableLoading, setisTableLoading] = useState(false);
   const [isModalLoading, setisModalLoading] = useState(false);
@@ -80,7 +70,33 @@ function Main() {
       setisTableLoading(true);
       const response = await axiosInstance.get("/list");
       if (response.status === 200) {
-        console.log(response.data.data, "===========response=============");
+        const data = response.data.data;
+        const refactoredData = data.map((curRow: any) => {
+          const result = {
+            ...curRow,
+            present: curRow.present.map((innerRow: any) => {
+              return { ...innerRow, tense: "Present" };
+            }),
+            presentPerfect: curRow.presentPerfect.map((innerRow: any) => {
+              return { ...innerRow, tense: "Present Perfect" };
+            }),
+            past: curRow.past.map((innerRow: any) => {
+              return { ...innerRow, tense: "Past" };
+            }),
+            pastPerfect: curRow.pastPerfect.map((innerRow: any) => {
+              return { ...innerRow, tense: "Past Perfect" };
+            }),
+            future: curRow.future.map((innerRow: any) => {
+              return { ...innerRow, tense: "Future" };
+            }),
+            futurePerfect: curRow.futurePerfect.map((innerRow: any) => {
+              return { ...innerRow, tense: "Future Perfect" };
+            }),
+          };
+          return result;
+        });
+        setdataSource(refactoredData)
+        console.log(refactoredData, "===========response=============");
       } else {
         message.error("Cant fetch data");
       }
@@ -129,90 +145,6 @@ function Main() {
     setAudioUrlForFuture(null);
     setAudioUrlForFuturePerfect(null);
   };
-
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      width: 100,
-      fixed: "start",
-      filters: [
-        {
-          text: "Joe",
-          value: "Joe",
-        },
-        {
-          text: "John",
-          value: "John",
-        },
-      ],
-      onFilter: (value, record) => record.name.indexOf(value) === 0,
-    },
-    {
-      title: "Other",
-      children: [
-        {
-          title: "Age",
-          dataIndex: "age",
-          key: "age",
-          width: 150,
-          sorter: (a, b) => a.age - b.age,
-        },
-        {
-          title: "Address",
-          children: [
-            {
-              title: "Street",
-              dataIndex: "street",
-              key: "street",
-              width: 150,
-            },
-            {
-              title: "Block",
-              children: [
-                {
-                  title: "Building",
-                  dataIndex: "building",
-                  key: "building",
-                  width: 100,
-                },
-                {
-                  title: "Door No.",
-                  dataIndex: "number",
-                  key: "number",
-                  width: 100,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Company",
-      children: [
-        {
-          title: "Company Address",
-          dataIndex: "companyAddress",
-          key: "companyAddress",
-          width: 200,
-        },
-        {
-          title: "Company Name",
-          dataIndex: "companyName",
-          key: "companyName",
-        },
-      ],
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      key: "gender",
-      width: 80,
-      fixed: "end",
-    },
-  ];
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
@@ -629,15 +561,7 @@ function Main() {
       </Modal>
       {/* End of Modal */}
       <Spin spinning={isTableLoading}>
-        {/* <Table
-          // className={styles.customTable}
-          columns={columns}
-          dataSource={dataSource}
-          bordered
-          size="middle"
-          scroll={{ x: "calc(700px + 50%)", y: 47 * 5 }}
-        /> */}
-        <NestedTable />
+        <VerbTable dataSource={dataSource} />
       </Spin>
     </Card>
   );
