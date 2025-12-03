@@ -1,11 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Button, Card, Modal, Input, Form, FormProps, Divider } from "antd";
+import {
+  Button,
+  Card,
+  Modal,
+  Input,
+  Form,
+  FormProps,
+  Divider,
+  message,
+} from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
 
-type FieldType = {
+export type FieldType = {
   verb: string;
   sentence: string;
   germanPresentVerb: string;
@@ -51,8 +60,6 @@ function Main() {
   const [isTableLoading, setisTableLoading] = useState(false);
   const [isModalLoading, setisModalLoading] = useState(false);
 
-  console.log(audioUrlForPresent, "audio Url");
-
   const getListData = async () => {
     try {
       const response = await axiosInstance.get("/list");
@@ -66,14 +73,63 @@ function Main() {
     setOpen(true);
   };
 
-  const handleSubmit = () => {};
-
   const handleCancel = () => {
     setOpen(false);
+    form.setFieldsValue({
+      verb: "",
+      sentence: "",
+      germanPresentVerb: "",
+      germanPresentSentence: "",
+      germanPresentPerfectVerb: "",
+      germanPresentPerfectSentence: "",
+      germanPastVerb: "",
+      germanPastSentence: "",
+      germanPastPerfectVerb: "",
+      germanPastPerfectSentence: "",
+      germanFutureVerb: "",
+      germanFutureSentence: "",
+      germanFuturePerfectVerb: "",
+      germanFuturePerfectSentence: "",
+      audioUrlForPresent: "",
+      audioUrlForPresentPerfect: "",
+      audioUrlForPast: "",
+      audioUrlForPastPerfect: "",
+      audioUrlForFuture: "",
+      audioUrlForFuturePerfect: "",
+    });
+    setAudioUrlForPresent(null);
+    setAudioUrlForPresentPerfect(null);
+
+    setAudioUrlForPast(null);
+    setAudioUrlForPastPerfect(null);
+
+    setAudioUrlForFuture(null);
+    setAudioUrlForFuturePerfect(null);
   };
 
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    try {
+      const body = {
+        ...values,
+        audioUrlForPresent: audioUrlForPresent,
+        audioUrlForPresentPerfect: audioUrlForPresentPerfect,
+        audioUrlForPast: audioUrlForPast,
+        audioUrlForPastPerfect: audioUrlForPastPerfect,
+        audioUrlForFuture: audioUrlForFuture,
+        audioUrlForFuturePerfect: audioUrlForFuturePerfect,
+      };
+      console.log("Success:", body);
+      const response = await axiosInstance.post("/submit-form", body);
+      if (response.status === 200) {
+        message.success("Saved successfully");
+        console.log(response.data);
+      } else {
+        message.error("Could not save data!");
+      }
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    }
   };
 
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
@@ -105,12 +161,14 @@ function Main() {
         ]}
       >
         <Form
+          form={form}
           name="Word"
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
+          <Divider>English</Divider>
           <Form.Item<FieldType>
             label="English Verb"
             name="verb"
@@ -135,6 +193,8 @@ function Main() {
           </Form.Item>
 
           <Divider />
+
+          <Divider>German Present</Divider>
 
           {/* Present */}
           <Form.Item<FieldType>
@@ -184,6 +244,8 @@ function Main() {
           </Form.Item>
 
           <Divider />
+
+          <Divider>German Present Perfect</Divider>
 
           {/* Present Perfect */}
           <Form.Item<FieldType>
@@ -237,6 +299,8 @@ function Main() {
 
           <Divider />
 
+          <Divider>German Past</Divider>
+
           {/* Past */}
           <Form.Item<FieldType>
             label="German Past Tense Verb"
@@ -283,6 +347,8 @@ function Main() {
               setAudioUrl={setAudioUrlForPast}
             />
           </Form.Item>
+
+          <Divider>German Past Perfect</Divider>
 
           {/* Past Perfect */}
           <Form.Item<FieldType>
@@ -336,6 +402,8 @@ function Main() {
 
           <Divider />
 
+          <Divider>German Future</Divider>
+
           {/* Future */}
           <Form.Item<FieldType>
             label="German Future Tense Verb"
@@ -384,6 +452,8 @@ function Main() {
           </Form.Item>
 
           <Divider />
+
+          <Divider>German Future Perfect</Divider>
 
           {/* Future Perfect*/}
           <Form.Item<FieldType>
