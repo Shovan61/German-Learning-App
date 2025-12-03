@@ -69,6 +69,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ status: 404, data: undefined }, origin);
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    return NextResponse.json({ error: "Error While submitting" }, { status: 500 });
   }
 }

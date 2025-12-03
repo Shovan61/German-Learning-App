@@ -15,7 +15,7 @@ datasource db {
 }
 
 model Verb {
-  id              Int              @id @default(autoincrement())
+  id              String           @id @default(uuid())
   englishVerb     String
   englishSentence String
   present         Present[]
@@ -27,8 +27,8 @@ model Verb {
 }
 
 model Present {
-  id             Int    @id @default(autoincrement())
-  verbId         Int
+  id             String @id @default(uuid())
+  verbId         String
   germanVerb     String
   germanSentence String
   verb           Verb   @relation(fields: [verbId], references: [id])
@@ -36,8 +36,8 @@ model Present {
 }
 
 model PresentPerfect {
-  id             Int    @id @default(autoincrement())
-  verbId         Int
+  id             String @id @default(uuid())
+  verbId         String
   germanVerb     String
   germanSentence String
   verb           Verb   @relation(fields: [verbId], references: [id])
@@ -45,8 +45,8 @@ model PresentPerfect {
 }
 
 model Past {
-  id             Int    @id @default(autoincrement())
-  verbId         Int
+  id             String @id @default(uuid())
+  verbId         String
   germanVerb     String
   germanSentence String
   verb           Verb   @relation(fields: [verbId], references: [id])
@@ -54,8 +54,8 @@ model Past {
 }
 
 model PastPerfect {
-  id             Int    @id @default(autoincrement())
-  verbId         Int
+  id             String @id @default(uuid())
+  verbId         String
   germanVerb     String
   germanSentence String
   verb           Verb   @relation(fields: [verbId], references: [id])
@@ -63,8 +63,8 @@ model PastPerfect {
 }
 
 model Future {
-  id             Int    @id @default(autoincrement())
-  verbId         Int
+  id             String @id @default(uuid())
+  verbId         String
   germanVerb     String
   germanSentence String
   verb           Verb   @relation(fields: [verbId], references: [id])
@@ -72,8 +72,8 @@ model Future {
 }
 
 model FuturePerfect {
-  id             Int    @id @default(autoincrement())
-  verbId         Int
+  id             String @id @default(uuid())
+  verbId         String
   germanVerb     String
   germanSentence String
   verb           Verb   @relation(fields: [verbId], references: [id])

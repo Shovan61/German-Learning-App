@@ -1496,28 +1496,18 @@ export namespace Prisma {
 
   export type AggregateVerb = {
     _count: VerbCountAggregateOutputType | null
-    _avg: VerbAvgAggregateOutputType | null
-    _sum: VerbSumAggregateOutputType | null
     _min: VerbMinAggregateOutputType | null
     _max: VerbMaxAggregateOutputType | null
   }
 
-  export type VerbAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type VerbSumAggregateOutputType = {
-    id: number | null
-  }
-
   export type VerbMinAggregateOutputType = {
-    id: number | null
+    id: string | null
     englishVerb: string | null
     englishSentence: string | null
   }
 
   export type VerbMaxAggregateOutputType = {
-    id: number | null
+    id: string | null
     englishVerb: string | null
     englishSentence: string | null
   }
@@ -1529,14 +1519,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type VerbAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type VerbSumAggregateInputType = {
-    id?: true
-  }
 
   export type VerbMinAggregateInputType = {
     id?: true
@@ -1595,18 +1577,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: VerbAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VerbSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: VerbMinAggregateInputType
@@ -1637,19 +1607,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: VerbCountAggregateInputType | true
-    _avg?: VerbAvgAggregateInputType
-    _sum?: VerbSumAggregateInputType
     _min?: VerbMinAggregateInputType
     _max?: VerbMaxAggregateInputType
   }
 
   export type VerbGroupByOutputType = {
-    id: number
+    id: string
     englishVerb: string
     englishSentence: string
     _count: VerbCountAggregateOutputType | null
-    _avg: VerbAvgAggregateOutputType | null
-    _sum: VerbSumAggregateOutputType | null
     _min: VerbMinAggregateOutputType | null
     _max: VerbMaxAggregateOutputType | null
   }
@@ -1723,7 +1689,7 @@ export namespace Prisma {
       futurePerfect: Prisma.$FuturePerfectPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      id: string
       englishVerb: string
       englishSentence: string
     }, ExtArgs["result"]["verb"]>
@@ -2155,7 +2121,7 @@ export namespace Prisma {
    * Fields of the Verb model
    */
   interface VerbFieldRefs {
-    readonly id: FieldRef<"Verb", 'Int'>
+    readonly id: FieldRef<"Verb", 'String'>
     readonly englishVerb: FieldRef<"Verb", 'String'>
     readonly englishSentence: FieldRef<"Verb", 'String'>
   }
@@ -2714,33 +2680,21 @@ export namespace Prisma {
 
   export type AggregatePresent = {
     _count: PresentCountAggregateOutputType | null
-    _avg: PresentAvgAggregateOutputType | null
-    _sum: PresentSumAggregateOutputType | null
     _min: PresentMinAggregateOutputType | null
     _max: PresentMaxAggregateOutputType | null
   }
 
-  export type PresentAvgAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
-  export type PresentSumAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
   export type PresentMinAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
   }
 
   export type PresentMaxAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
@@ -2755,16 +2709,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type PresentAvgAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
-
-  export type PresentSumAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
 
   export type PresentMinAggregateInputType = {
     id?: true
@@ -2829,18 +2773,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PresentAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PresentSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PresentMinAggregateInputType
@@ -2871,21 +2803,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PresentCountAggregateInputType | true
-    _avg?: PresentAvgAggregateInputType
-    _sum?: PresentSumAggregateInputType
     _min?: PresentMinAggregateInputType
     _max?: PresentMaxAggregateInputType
   }
 
   export type PresentGroupByOutputType = {
-    id: number
-    verbId: number
+    id: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
     _count: PresentCountAggregateOutputType | null
-    _avg: PresentAvgAggregateOutputType | null
-    _sum: PresentSumAggregateOutputType | null
     _min: PresentMinAggregateOutputType | null
     _max: PresentMaxAggregateOutputType | null
   }
@@ -2956,8 +2884,8 @@ export namespace Prisma {
       verb: Prisma.$VerbPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      verbId: number
+      id: string
+      verbId: string
       germanVerb: string
       germanSentence: string
       audio: string
@@ -3385,8 +3313,8 @@ export namespace Prisma {
    * Fields of the Present model
    */
   interface PresentFieldRefs {
-    readonly id: FieldRef<"Present", 'Int'>
-    readonly verbId: FieldRef<"Present", 'Int'>
+    readonly id: FieldRef<"Present", 'String'>
+    readonly verbId: FieldRef<"Present", 'String'>
     readonly germanVerb: FieldRef<"Present", 'String'>
     readonly germanSentence: FieldRef<"Present", 'String'>
     readonly audio: FieldRef<"Present", 'String'>
@@ -3810,33 +3738,21 @@ export namespace Prisma {
 
   export type AggregatePresentPerfect = {
     _count: PresentPerfectCountAggregateOutputType | null
-    _avg: PresentPerfectAvgAggregateOutputType | null
-    _sum: PresentPerfectSumAggregateOutputType | null
     _min: PresentPerfectMinAggregateOutputType | null
     _max: PresentPerfectMaxAggregateOutputType | null
   }
 
-  export type PresentPerfectAvgAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
-  export type PresentPerfectSumAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
   export type PresentPerfectMinAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
   }
 
   export type PresentPerfectMaxAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
@@ -3851,16 +3767,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type PresentPerfectAvgAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
-
-  export type PresentPerfectSumAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
 
   export type PresentPerfectMinAggregateInputType = {
     id?: true
@@ -3925,18 +3831,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PresentPerfectAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PresentPerfectSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PresentPerfectMinAggregateInputType
@@ -3967,21 +3861,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PresentPerfectCountAggregateInputType | true
-    _avg?: PresentPerfectAvgAggregateInputType
-    _sum?: PresentPerfectSumAggregateInputType
     _min?: PresentPerfectMinAggregateInputType
     _max?: PresentPerfectMaxAggregateInputType
   }
 
   export type PresentPerfectGroupByOutputType = {
-    id: number
-    verbId: number
+    id: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
     _count: PresentPerfectCountAggregateOutputType | null
-    _avg: PresentPerfectAvgAggregateOutputType | null
-    _sum: PresentPerfectSumAggregateOutputType | null
     _min: PresentPerfectMinAggregateOutputType | null
     _max: PresentPerfectMaxAggregateOutputType | null
   }
@@ -4052,8 +3942,8 @@ export namespace Prisma {
       verb: Prisma.$VerbPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      verbId: number
+      id: string
+      verbId: string
       germanVerb: string
       germanSentence: string
       audio: string
@@ -4481,8 +4371,8 @@ export namespace Prisma {
    * Fields of the PresentPerfect model
    */
   interface PresentPerfectFieldRefs {
-    readonly id: FieldRef<"PresentPerfect", 'Int'>
-    readonly verbId: FieldRef<"PresentPerfect", 'Int'>
+    readonly id: FieldRef<"PresentPerfect", 'String'>
+    readonly verbId: FieldRef<"PresentPerfect", 'String'>
     readonly germanVerb: FieldRef<"PresentPerfect", 'String'>
     readonly germanSentence: FieldRef<"PresentPerfect", 'String'>
     readonly audio: FieldRef<"PresentPerfect", 'String'>
@@ -4906,33 +4796,21 @@ export namespace Prisma {
 
   export type AggregatePast = {
     _count: PastCountAggregateOutputType | null
-    _avg: PastAvgAggregateOutputType | null
-    _sum: PastSumAggregateOutputType | null
     _min: PastMinAggregateOutputType | null
     _max: PastMaxAggregateOutputType | null
   }
 
-  export type PastAvgAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
-  export type PastSumAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
   export type PastMinAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
   }
 
   export type PastMaxAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
@@ -4947,16 +4825,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type PastAvgAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
-
-  export type PastSumAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
 
   export type PastMinAggregateInputType = {
     id?: true
@@ -5021,18 +4889,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PastAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PastSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PastMinAggregateInputType
@@ -5063,21 +4919,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PastCountAggregateInputType | true
-    _avg?: PastAvgAggregateInputType
-    _sum?: PastSumAggregateInputType
     _min?: PastMinAggregateInputType
     _max?: PastMaxAggregateInputType
   }
 
   export type PastGroupByOutputType = {
-    id: number
-    verbId: number
+    id: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
     _count: PastCountAggregateOutputType | null
-    _avg: PastAvgAggregateOutputType | null
-    _sum: PastSumAggregateOutputType | null
     _min: PastMinAggregateOutputType | null
     _max: PastMaxAggregateOutputType | null
   }
@@ -5148,8 +5000,8 @@ export namespace Prisma {
       verb: Prisma.$VerbPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      verbId: number
+      id: string
+      verbId: string
       germanVerb: string
       germanSentence: string
       audio: string
@@ -5577,8 +5429,8 @@ export namespace Prisma {
    * Fields of the Past model
    */
   interface PastFieldRefs {
-    readonly id: FieldRef<"Past", 'Int'>
-    readonly verbId: FieldRef<"Past", 'Int'>
+    readonly id: FieldRef<"Past", 'String'>
+    readonly verbId: FieldRef<"Past", 'String'>
     readonly germanVerb: FieldRef<"Past", 'String'>
     readonly germanSentence: FieldRef<"Past", 'String'>
     readonly audio: FieldRef<"Past", 'String'>
@@ -6002,33 +5854,21 @@ export namespace Prisma {
 
   export type AggregatePastPerfect = {
     _count: PastPerfectCountAggregateOutputType | null
-    _avg: PastPerfectAvgAggregateOutputType | null
-    _sum: PastPerfectSumAggregateOutputType | null
     _min: PastPerfectMinAggregateOutputType | null
     _max: PastPerfectMaxAggregateOutputType | null
   }
 
-  export type PastPerfectAvgAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
-  export type PastPerfectSumAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
   export type PastPerfectMinAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
   }
 
   export type PastPerfectMaxAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
@@ -6043,16 +5883,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type PastPerfectAvgAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
-
-  export type PastPerfectSumAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
 
   export type PastPerfectMinAggregateInputType = {
     id?: true
@@ -6117,18 +5947,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PastPerfectAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PastPerfectSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PastPerfectMinAggregateInputType
@@ -6159,21 +5977,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PastPerfectCountAggregateInputType | true
-    _avg?: PastPerfectAvgAggregateInputType
-    _sum?: PastPerfectSumAggregateInputType
     _min?: PastPerfectMinAggregateInputType
     _max?: PastPerfectMaxAggregateInputType
   }
 
   export type PastPerfectGroupByOutputType = {
-    id: number
-    verbId: number
+    id: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
     _count: PastPerfectCountAggregateOutputType | null
-    _avg: PastPerfectAvgAggregateOutputType | null
-    _sum: PastPerfectSumAggregateOutputType | null
     _min: PastPerfectMinAggregateOutputType | null
     _max: PastPerfectMaxAggregateOutputType | null
   }
@@ -6244,8 +6058,8 @@ export namespace Prisma {
       verb: Prisma.$VerbPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      verbId: number
+      id: string
+      verbId: string
       germanVerb: string
       germanSentence: string
       audio: string
@@ -6673,8 +6487,8 @@ export namespace Prisma {
    * Fields of the PastPerfect model
    */
   interface PastPerfectFieldRefs {
-    readonly id: FieldRef<"PastPerfect", 'Int'>
-    readonly verbId: FieldRef<"PastPerfect", 'Int'>
+    readonly id: FieldRef<"PastPerfect", 'String'>
+    readonly verbId: FieldRef<"PastPerfect", 'String'>
     readonly germanVerb: FieldRef<"PastPerfect", 'String'>
     readonly germanSentence: FieldRef<"PastPerfect", 'String'>
     readonly audio: FieldRef<"PastPerfect", 'String'>
@@ -7098,33 +6912,21 @@ export namespace Prisma {
 
   export type AggregateFuture = {
     _count: FutureCountAggregateOutputType | null
-    _avg: FutureAvgAggregateOutputType | null
-    _sum: FutureSumAggregateOutputType | null
     _min: FutureMinAggregateOutputType | null
     _max: FutureMaxAggregateOutputType | null
   }
 
-  export type FutureAvgAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
-  export type FutureSumAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
   export type FutureMinAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
   }
 
   export type FutureMaxAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
@@ -7139,16 +6941,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type FutureAvgAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
-
-  export type FutureSumAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
 
   export type FutureMinAggregateInputType = {
     id?: true
@@ -7213,18 +7005,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: FutureAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: FutureSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: FutureMinAggregateInputType
@@ -7255,21 +7035,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: FutureCountAggregateInputType | true
-    _avg?: FutureAvgAggregateInputType
-    _sum?: FutureSumAggregateInputType
     _min?: FutureMinAggregateInputType
     _max?: FutureMaxAggregateInputType
   }
 
   export type FutureGroupByOutputType = {
-    id: number
-    verbId: number
+    id: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
     _count: FutureCountAggregateOutputType | null
-    _avg: FutureAvgAggregateOutputType | null
-    _sum: FutureSumAggregateOutputType | null
     _min: FutureMinAggregateOutputType | null
     _max: FutureMaxAggregateOutputType | null
   }
@@ -7340,8 +7116,8 @@ export namespace Prisma {
       verb: Prisma.$VerbPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      verbId: number
+      id: string
+      verbId: string
       germanVerb: string
       germanSentence: string
       audio: string
@@ -7769,8 +7545,8 @@ export namespace Prisma {
    * Fields of the Future model
    */
   interface FutureFieldRefs {
-    readonly id: FieldRef<"Future", 'Int'>
-    readonly verbId: FieldRef<"Future", 'Int'>
+    readonly id: FieldRef<"Future", 'String'>
+    readonly verbId: FieldRef<"Future", 'String'>
     readonly germanVerb: FieldRef<"Future", 'String'>
     readonly germanSentence: FieldRef<"Future", 'String'>
     readonly audio: FieldRef<"Future", 'String'>
@@ -8194,33 +7970,21 @@ export namespace Prisma {
 
   export type AggregateFuturePerfect = {
     _count: FuturePerfectCountAggregateOutputType | null
-    _avg: FuturePerfectAvgAggregateOutputType | null
-    _sum: FuturePerfectSumAggregateOutputType | null
     _min: FuturePerfectMinAggregateOutputType | null
     _max: FuturePerfectMaxAggregateOutputType | null
   }
 
-  export type FuturePerfectAvgAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
-  export type FuturePerfectSumAggregateOutputType = {
-    id: number | null
-    verbId: number | null
-  }
-
   export type FuturePerfectMinAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
   }
 
   export type FuturePerfectMaxAggregateOutputType = {
-    id: number | null
-    verbId: number | null
+    id: string | null
+    verbId: string | null
     germanVerb: string | null
     germanSentence: string | null
     audio: string | null
@@ -8235,16 +7999,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type FuturePerfectAvgAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
-
-  export type FuturePerfectSumAggregateInputType = {
-    id?: true
-    verbId?: true
-  }
 
   export type FuturePerfectMinAggregateInputType = {
     id?: true
@@ -8309,18 +8063,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: FuturePerfectAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: FuturePerfectSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: FuturePerfectMinAggregateInputType
@@ -8351,21 +8093,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: FuturePerfectCountAggregateInputType | true
-    _avg?: FuturePerfectAvgAggregateInputType
-    _sum?: FuturePerfectSumAggregateInputType
     _min?: FuturePerfectMinAggregateInputType
     _max?: FuturePerfectMaxAggregateInputType
   }
 
   export type FuturePerfectGroupByOutputType = {
-    id: number
-    verbId: number
+    id: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
     _count: FuturePerfectCountAggregateOutputType | null
-    _avg: FuturePerfectAvgAggregateOutputType | null
-    _sum: FuturePerfectSumAggregateOutputType | null
     _min: FuturePerfectMinAggregateOutputType | null
     _max: FuturePerfectMaxAggregateOutputType | null
   }
@@ -8436,8 +8174,8 @@ export namespace Prisma {
       verb: Prisma.$VerbPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      verbId: number
+      id: string
+      verbId: string
       germanVerb: string
       germanSentence: string
       audio: string
@@ -8865,8 +8603,8 @@ export namespace Prisma {
    * Fields of the FuturePerfect model
    */
   interface FuturePerfectFieldRefs {
-    readonly id: FieldRef<"FuturePerfect", 'Int'>
-    readonly verbId: FieldRef<"FuturePerfect", 'Int'>
+    readonly id: FieldRef<"FuturePerfect", 'String'>
+    readonly verbId: FieldRef<"FuturePerfect", 'String'>
     readonly germanVerb: FieldRef<"FuturePerfect", 'String'>
     readonly germanSentence: FieldRef<"FuturePerfect", 'String'>
     readonly audio: FieldRef<"FuturePerfect", 'String'>
@@ -9395,20 +9133,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -9423,16 +9147,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Int'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'Float[]'
+   * Reference to a field of type 'Int[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
   /**
    * Deep Input Types
@@ -9443,7 +9167,7 @@ export namespace Prisma {
     AND?: VerbWhereInput | VerbWhereInput[]
     OR?: VerbWhereInput[]
     NOT?: VerbWhereInput | VerbWhereInput[]
-    id?: IntFilter<"Verb"> | number
+    id?: StringFilter<"Verb"> | string
     englishVerb?: StringFilter<"Verb"> | string
     englishSentence?: StringFilter<"Verb"> | string
     present?: PresentListRelationFilter
@@ -9467,7 +9191,7 @@ export namespace Prisma {
   }
 
   export type VerbWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: VerbWhereInput | VerbWhereInput[]
     OR?: VerbWhereInput[]
     NOT?: VerbWhereInput | VerbWhereInput[]
@@ -9486,17 +9210,15 @@ export namespace Prisma {
     englishVerb?: SortOrder
     englishSentence?: SortOrder
     _count?: VerbCountOrderByAggregateInput
-    _avg?: VerbAvgOrderByAggregateInput
     _max?: VerbMaxOrderByAggregateInput
     _min?: VerbMinOrderByAggregateInput
-    _sum?: VerbSumOrderByAggregateInput
   }
 
   export type VerbScalarWhereWithAggregatesInput = {
     AND?: VerbScalarWhereWithAggregatesInput | VerbScalarWhereWithAggregatesInput[]
     OR?: VerbScalarWhereWithAggregatesInput[]
     NOT?: VerbScalarWhereWithAggregatesInput | VerbScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Verb"> | number
+    id?: StringWithAggregatesFilter<"Verb"> | string
     englishVerb?: StringWithAggregatesFilter<"Verb"> | string
     englishSentence?: StringWithAggregatesFilter<"Verb"> | string
   }
@@ -9505,8 +9227,8 @@ export namespace Prisma {
     AND?: PresentWhereInput | PresentWhereInput[]
     OR?: PresentWhereInput[]
     NOT?: PresentWhereInput | PresentWhereInput[]
-    id?: IntFilter<"Present"> | number
-    verbId?: IntFilter<"Present"> | number
+    id?: StringFilter<"Present"> | string
+    verbId?: StringFilter<"Present"> | string
     germanVerb?: StringFilter<"Present"> | string
     germanSentence?: StringFilter<"Present"> | string
     audio?: StringFilter<"Present"> | string
@@ -9523,11 +9245,11 @@ export namespace Prisma {
   }
 
   export type PresentWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: PresentWhereInput | PresentWhereInput[]
     OR?: PresentWhereInput[]
     NOT?: PresentWhereInput | PresentWhereInput[]
-    verbId?: IntFilter<"Present"> | number
+    verbId?: StringFilter<"Present"> | string
     germanVerb?: StringFilter<"Present"> | string
     germanSentence?: StringFilter<"Present"> | string
     audio?: StringFilter<"Present"> | string
@@ -9541,18 +9263,16 @@ export namespace Prisma {
     germanSentence?: SortOrder
     audio?: SortOrder
     _count?: PresentCountOrderByAggregateInput
-    _avg?: PresentAvgOrderByAggregateInput
     _max?: PresentMaxOrderByAggregateInput
     _min?: PresentMinOrderByAggregateInput
-    _sum?: PresentSumOrderByAggregateInput
   }
 
   export type PresentScalarWhereWithAggregatesInput = {
     AND?: PresentScalarWhereWithAggregatesInput | PresentScalarWhereWithAggregatesInput[]
     OR?: PresentScalarWhereWithAggregatesInput[]
     NOT?: PresentScalarWhereWithAggregatesInput | PresentScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Present"> | number
-    verbId?: IntWithAggregatesFilter<"Present"> | number
+    id?: StringWithAggregatesFilter<"Present"> | string
+    verbId?: StringWithAggregatesFilter<"Present"> | string
     germanVerb?: StringWithAggregatesFilter<"Present"> | string
     germanSentence?: StringWithAggregatesFilter<"Present"> | string
     audio?: StringWithAggregatesFilter<"Present"> | string
@@ -9562,8 +9282,8 @@ export namespace Prisma {
     AND?: PresentPerfectWhereInput | PresentPerfectWhereInput[]
     OR?: PresentPerfectWhereInput[]
     NOT?: PresentPerfectWhereInput | PresentPerfectWhereInput[]
-    id?: IntFilter<"PresentPerfect"> | number
-    verbId?: IntFilter<"PresentPerfect"> | number
+    id?: StringFilter<"PresentPerfect"> | string
+    verbId?: StringFilter<"PresentPerfect"> | string
     germanVerb?: StringFilter<"PresentPerfect"> | string
     germanSentence?: StringFilter<"PresentPerfect"> | string
     audio?: StringFilter<"PresentPerfect"> | string
@@ -9580,11 +9300,11 @@ export namespace Prisma {
   }
 
   export type PresentPerfectWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: PresentPerfectWhereInput | PresentPerfectWhereInput[]
     OR?: PresentPerfectWhereInput[]
     NOT?: PresentPerfectWhereInput | PresentPerfectWhereInput[]
-    verbId?: IntFilter<"PresentPerfect"> | number
+    verbId?: StringFilter<"PresentPerfect"> | string
     germanVerb?: StringFilter<"PresentPerfect"> | string
     germanSentence?: StringFilter<"PresentPerfect"> | string
     audio?: StringFilter<"PresentPerfect"> | string
@@ -9598,18 +9318,16 @@ export namespace Prisma {
     germanSentence?: SortOrder
     audio?: SortOrder
     _count?: PresentPerfectCountOrderByAggregateInput
-    _avg?: PresentPerfectAvgOrderByAggregateInput
     _max?: PresentPerfectMaxOrderByAggregateInput
     _min?: PresentPerfectMinOrderByAggregateInput
-    _sum?: PresentPerfectSumOrderByAggregateInput
   }
 
   export type PresentPerfectScalarWhereWithAggregatesInput = {
     AND?: PresentPerfectScalarWhereWithAggregatesInput | PresentPerfectScalarWhereWithAggregatesInput[]
     OR?: PresentPerfectScalarWhereWithAggregatesInput[]
     NOT?: PresentPerfectScalarWhereWithAggregatesInput | PresentPerfectScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"PresentPerfect"> | number
-    verbId?: IntWithAggregatesFilter<"PresentPerfect"> | number
+    id?: StringWithAggregatesFilter<"PresentPerfect"> | string
+    verbId?: StringWithAggregatesFilter<"PresentPerfect"> | string
     germanVerb?: StringWithAggregatesFilter<"PresentPerfect"> | string
     germanSentence?: StringWithAggregatesFilter<"PresentPerfect"> | string
     audio?: StringWithAggregatesFilter<"PresentPerfect"> | string
@@ -9619,8 +9337,8 @@ export namespace Prisma {
     AND?: PastWhereInput | PastWhereInput[]
     OR?: PastWhereInput[]
     NOT?: PastWhereInput | PastWhereInput[]
-    id?: IntFilter<"Past"> | number
-    verbId?: IntFilter<"Past"> | number
+    id?: StringFilter<"Past"> | string
+    verbId?: StringFilter<"Past"> | string
     germanVerb?: StringFilter<"Past"> | string
     germanSentence?: StringFilter<"Past"> | string
     audio?: StringFilter<"Past"> | string
@@ -9637,11 +9355,11 @@ export namespace Prisma {
   }
 
   export type PastWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: PastWhereInput | PastWhereInput[]
     OR?: PastWhereInput[]
     NOT?: PastWhereInput | PastWhereInput[]
-    verbId?: IntFilter<"Past"> | number
+    verbId?: StringFilter<"Past"> | string
     germanVerb?: StringFilter<"Past"> | string
     germanSentence?: StringFilter<"Past"> | string
     audio?: StringFilter<"Past"> | string
@@ -9655,18 +9373,16 @@ export namespace Prisma {
     germanSentence?: SortOrder
     audio?: SortOrder
     _count?: PastCountOrderByAggregateInput
-    _avg?: PastAvgOrderByAggregateInput
     _max?: PastMaxOrderByAggregateInput
     _min?: PastMinOrderByAggregateInput
-    _sum?: PastSumOrderByAggregateInput
   }
 
   export type PastScalarWhereWithAggregatesInput = {
     AND?: PastScalarWhereWithAggregatesInput | PastScalarWhereWithAggregatesInput[]
     OR?: PastScalarWhereWithAggregatesInput[]
     NOT?: PastScalarWhereWithAggregatesInput | PastScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Past"> | number
-    verbId?: IntWithAggregatesFilter<"Past"> | number
+    id?: StringWithAggregatesFilter<"Past"> | string
+    verbId?: StringWithAggregatesFilter<"Past"> | string
     germanVerb?: StringWithAggregatesFilter<"Past"> | string
     germanSentence?: StringWithAggregatesFilter<"Past"> | string
     audio?: StringWithAggregatesFilter<"Past"> | string
@@ -9676,8 +9392,8 @@ export namespace Prisma {
     AND?: PastPerfectWhereInput | PastPerfectWhereInput[]
     OR?: PastPerfectWhereInput[]
     NOT?: PastPerfectWhereInput | PastPerfectWhereInput[]
-    id?: IntFilter<"PastPerfect"> | number
-    verbId?: IntFilter<"PastPerfect"> | number
+    id?: StringFilter<"PastPerfect"> | string
+    verbId?: StringFilter<"PastPerfect"> | string
     germanVerb?: StringFilter<"PastPerfect"> | string
     germanSentence?: StringFilter<"PastPerfect"> | string
     audio?: StringFilter<"PastPerfect"> | string
@@ -9694,11 +9410,11 @@ export namespace Prisma {
   }
 
   export type PastPerfectWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: PastPerfectWhereInput | PastPerfectWhereInput[]
     OR?: PastPerfectWhereInput[]
     NOT?: PastPerfectWhereInput | PastPerfectWhereInput[]
-    verbId?: IntFilter<"PastPerfect"> | number
+    verbId?: StringFilter<"PastPerfect"> | string
     germanVerb?: StringFilter<"PastPerfect"> | string
     germanSentence?: StringFilter<"PastPerfect"> | string
     audio?: StringFilter<"PastPerfect"> | string
@@ -9712,18 +9428,16 @@ export namespace Prisma {
     germanSentence?: SortOrder
     audio?: SortOrder
     _count?: PastPerfectCountOrderByAggregateInput
-    _avg?: PastPerfectAvgOrderByAggregateInput
     _max?: PastPerfectMaxOrderByAggregateInput
     _min?: PastPerfectMinOrderByAggregateInput
-    _sum?: PastPerfectSumOrderByAggregateInput
   }
 
   export type PastPerfectScalarWhereWithAggregatesInput = {
     AND?: PastPerfectScalarWhereWithAggregatesInput | PastPerfectScalarWhereWithAggregatesInput[]
     OR?: PastPerfectScalarWhereWithAggregatesInput[]
     NOT?: PastPerfectScalarWhereWithAggregatesInput | PastPerfectScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"PastPerfect"> | number
-    verbId?: IntWithAggregatesFilter<"PastPerfect"> | number
+    id?: StringWithAggregatesFilter<"PastPerfect"> | string
+    verbId?: StringWithAggregatesFilter<"PastPerfect"> | string
     germanVerb?: StringWithAggregatesFilter<"PastPerfect"> | string
     germanSentence?: StringWithAggregatesFilter<"PastPerfect"> | string
     audio?: StringWithAggregatesFilter<"PastPerfect"> | string
@@ -9733,8 +9447,8 @@ export namespace Prisma {
     AND?: FutureWhereInput | FutureWhereInput[]
     OR?: FutureWhereInput[]
     NOT?: FutureWhereInput | FutureWhereInput[]
-    id?: IntFilter<"Future"> | number
-    verbId?: IntFilter<"Future"> | number
+    id?: StringFilter<"Future"> | string
+    verbId?: StringFilter<"Future"> | string
     germanVerb?: StringFilter<"Future"> | string
     germanSentence?: StringFilter<"Future"> | string
     audio?: StringFilter<"Future"> | string
@@ -9751,11 +9465,11 @@ export namespace Prisma {
   }
 
   export type FutureWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: FutureWhereInput | FutureWhereInput[]
     OR?: FutureWhereInput[]
     NOT?: FutureWhereInput | FutureWhereInput[]
-    verbId?: IntFilter<"Future"> | number
+    verbId?: StringFilter<"Future"> | string
     germanVerb?: StringFilter<"Future"> | string
     germanSentence?: StringFilter<"Future"> | string
     audio?: StringFilter<"Future"> | string
@@ -9769,18 +9483,16 @@ export namespace Prisma {
     germanSentence?: SortOrder
     audio?: SortOrder
     _count?: FutureCountOrderByAggregateInput
-    _avg?: FutureAvgOrderByAggregateInput
     _max?: FutureMaxOrderByAggregateInput
     _min?: FutureMinOrderByAggregateInput
-    _sum?: FutureSumOrderByAggregateInput
   }
 
   export type FutureScalarWhereWithAggregatesInput = {
     AND?: FutureScalarWhereWithAggregatesInput | FutureScalarWhereWithAggregatesInput[]
     OR?: FutureScalarWhereWithAggregatesInput[]
     NOT?: FutureScalarWhereWithAggregatesInput | FutureScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Future"> | number
-    verbId?: IntWithAggregatesFilter<"Future"> | number
+    id?: StringWithAggregatesFilter<"Future"> | string
+    verbId?: StringWithAggregatesFilter<"Future"> | string
     germanVerb?: StringWithAggregatesFilter<"Future"> | string
     germanSentence?: StringWithAggregatesFilter<"Future"> | string
     audio?: StringWithAggregatesFilter<"Future"> | string
@@ -9790,8 +9502,8 @@ export namespace Prisma {
     AND?: FuturePerfectWhereInput | FuturePerfectWhereInput[]
     OR?: FuturePerfectWhereInput[]
     NOT?: FuturePerfectWhereInput | FuturePerfectWhereInput[]
-    id?: IntFilter<"FuturePerfect"> | number
-    verbId?: IntFilter<"FuturePerfect"> | number
+    id?: StringFilter<"FuturePerfect"> | string
+    verbId?: StringFilter<"FuturePerfect"> | string
     germanVerb?: StringFilter<"FuturePerfect"> | string
     germanSentence?: StringFilter<"FuturePerfect"> | string
     audio?: StringFilter<"FuturePerfect"> | string
@@ -9808,11 +9520,11 @@ export namespace Prisma {
   }
 
   export type FuturePerfectWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: FuturePerfectWhereInput | FuturePerfectWhereInput[]
     OR?: FuturePerfectWhereInput[]
     NOT?: FuturePerfectWhereInput | FuturePerfectWhereInput[]
-    verbId?: IntFilter<"FuturePerfect"> | number
+    verbId?: StringFilter<"FuturePerfect"> | string
     germanVerb?: StringFilter<"FuturePerfect"> | string
     germanSentence?: StringFilter<"FuturePerfect"> | string
     audio?: StringFilter<"FuturePerfect"> | string
@@ -9826,24 +9538,23 @@ export namespace Prisma {
     germanSentence?: SortOrder
     audio?: SortOrder
     _count?: FuturePerfectCountOrderByAggregateInput
-    _avg?: FuturePerfectAvgOrderByAggregateInput
     _max?: FuturePerfectMaxOrderByAggregateInput
     _min?: FuturePerfectMinOrderByAggregateInput
-    _sum?: FuturePerfectSumOrderByAggregateInput
   }
 
   export type FuturePerfectScalarWhereWithAggregatesInput = {
     AND?: FuturePerfectScalarWhereWithAggregatesInput | FuturePerfectScalarWhereWithAggregatesInput[]
     OR?: FuturePerfectScalarWhereWithAggregatesInput[]
     NOT?: FuturePerfectScalarWhereWithAggregatesInput | FuturePerfectScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"FuturePerfect"> | number
-    verbId?: IntWithAggregatesFilter<"FuturePerfect"> | number
+    id?: StringWithAggregatesFilter<"FuturePerfect"> | string
+    verbId?: StringWithAggregatesFilter<"FuturePerfect"> | string
     germanVerb?: StringWithAggregatesFilter<"FuturePerfect"> | string
     germanSentence?: StringWithAggregatesFilter<"FuturePerfect"> | string
     audio?: StringWithAggregatesFilter<"FuturePerfect"> | string
   }
 
   export type VerbCreateInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentCreateNestedManyWithoutVerbInput
@@ -9855,7 +9566,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentUncheckedCreateNestedManyWithoutVerbInput
@@ -9867,6 +9578,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUpdateManyWithoutVerbNestedInput
@@ -9878,7 +9590,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUncheckedUpdateManyWithoutVerbNestedInput
@@ -9890,23 +9602,25 @@ export namespace Prisma {
   }
 
   export type VerbCreateManyInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
   }
 
   export type VerbUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
   }
 
   export type VerbUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentCreateInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -9914,14 +9628,15 @@ export namespace Prisma {
   }
 
   export type PresentUncheckedCreateInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
@@ -9929,36 +9644,38 @@ export namespace Prisma {
   }
 
   export type PresentUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentCreateManyInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentPerfectCreateInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -9966,14 +9683,15 @@ export namespace Prisma {
   }
 
   export type PresentPerfectUncheckedCreateInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentPerfectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
@@ -9981,36 +9699,38 @@ export namespace Prisma {
   }
 
   export type PresentPerfectUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentPerfectCreateManyInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentPerfectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentPerfectUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastCreateInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -10018,14 +9738,15 @@ export namespace Prisma {
   }
 
   export type PastUncheckedCreateInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
@@ -10033,36 +9754,38 @@ export namespace Prisma {
   }
 
   export type PastUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastCreateManyInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastPerfectCreateInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -10070,14 +9793,15 @@ export namespace Prisma {
   }
 
   export type PastPerfectUncheckedCreateInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastPerfectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
@@ -10085,36 +9809,38 @@ export namespace Prisma {
   }
 
   export type PastPerfectUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastPerfectCreateManyInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastPerfectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastPerfectUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FutureCreateInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -10122,14 +9848,15 @@ export namespace Prisma {
   }
 
   export type FutureUncheckedCreateInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FutureUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
@@ -10137,36 +9864,38 @@ export namespace Prisma {
   }
 
   export type FutureUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FutureCreateManyInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FutureUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FutureUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FuturePerfectCreateInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -10174,14 +9903,15 @@ export namespace Prisma {
   }
 
   export type FuturePerfectUncheckedCreateInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FuturePerfectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
@@ -10189,44 +9919,34 @@ export namespace Prisma {
   }
 
   export type FuturePerfectUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FuturePerfectCreateManyInput = {
-    id?: number
-    verbId: number
+    id?: string
+    verbId: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FuturePerfectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FuturePerfectUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    verbId?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
+    verbId?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -10310,10 +10030,6 @@ export namespace Prisma {
     englishSentence?: SortOrder
   }
 
-  export type VerbAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
   export type VerbMaxOrderByAggregateInput = {
     id?: SortOrder
     englishVerb?: SortOrder
@@ -10324,26 +10040,6 @@ export namespace Prisma {
     id?: SortOrder
     englishVerb?: SortOrder
     englishSentence?: SortOrder
-  }
-
-  export type VerbSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -10377,11 +10073,6 @@ export namespace Prisma {
     audio?: SortOrder
   }
 
-  export type PresentAvgOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
-  }
-
   export type PresentMaxOrderByAggregateInput = {
     id?: SortOrder
     verbId?: SortOrder
@@ -10398,22 +10089,12 @@ export namespace Prisma {
     audio?: SortOrder
   }
 
-  export type PresentSumOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
-  }
-
   export type PresentPerfectCountOrderByAggregateInput = {
     id?: SortOrder
     verbId?: SortOrder
     germanVerb?: SortOrder
     germanSentence?: SortOrder
     audio?: SortOrder
-  }
-
-  export type PresentPerfectAvgOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
   }
 
   export type PresentPerfectMaxOrderByAggregateInput = {
@@ -10432,22 +10113,12 @@ export namespace Prisma {
     audio?: SortOrder
   }
 
-  export type PresentPerfectSumOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
-  }
-
   export type PastCountOrderByAggregateInput = {
     id?: SortOrder
     verbId?: SortOrder
     germanVerb?: SortOrder
     germanSentence?: SortOrder
     audio?: SortOrder
-  }
-
-  export type PastAvgOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
   }
 
   export type PastMaxOrderByAggregateInput = {
@@ -10466,22 +10137,12 @@ export namespace Prisma {
     audio?: SortOrder
   }
 
-  export type PastSumOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
-  }
-
   export type PastPerfectCountOrderByAggregateInput = {
     id?: SortOrder
     verbId?: SortOrder
     germanVerb?: SortOrder
     germanSentence?: SortOrder
     audio?: SortOrder
-  }
-
-  export type PastPerfectAvgOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
   }
 
   export type PastPerfectMaxOrderByAggregateInput = {
@@ -10500,22 +10161,12 @@ export namespace Prisma {
     audio?: SortOrder
   }
 
-  export type PastPerfectSumOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
-  }
-
   export type FutureCountOrderByAggregateInput = {
     id?: SortOrder
     verbId?: SortOrder
     germanVerb?: SortOrder
     germanSentence?: SortOrder
     audio?: SortOrder
-  }
-
-  export type FutureAvgOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
   }
 
   export type FutureMaxOrderByAggregateInput = {
@@ -10534,22 +10185,12 @@ export namespace Prisma {
     audio?: SortOrder
   }
 
-  export type FutureSumOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
-  }
-
   export type FuturePerfectCountOrderByAggregateInput = {
     id?: SortOrder
     verbId?: SortOrder
     germanVerb?: SortOrder
     germanSentence?: SortOrder
     audio?: SortOrder
-  }
-
-  export type FuturePerfectAvgOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
   }
 
   export type FuturePerfectMaxOrderByAggregateInput = {
@@ -10566,11 +10207,6 @@ export namespace Prisma {
     germanVerb?: SortOrder
     germanSentence?: SortOrder
     audio?: SortOrder
-  }
-
-  export type FuturePerfectSumOrderByAggregateInput = {
-    id?: SortOrder
-    verbId?: SortOrder
   }
 
   export type PresentCreateNestedManyWithoutVerbInput = {
@@ -10745,14 +10381,6 @@ export namespace Prisma {
     deleteMany?: FuturePerfectScalarWhereInput | FuturePerfectScalarWhereInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type PresentUncheckedUpdateManyWithoutVerbNestedInput = {
     create?: XOR<PresentCreateWithoutVerbInput, PresentUncheckedCreateWithoutVerbInput> | PresentCreateWithoutVerbInput[] | PresentUncheckedCreateWithoutVerbInput[]
     connectOrCreate?: PresentCreateOrConnectWithoutVerbInput | PresentCreateOrConnectWithoutVerbInput[]
@@ -10921,17 +10549,6 @@ export namespace Prisma {
     update?: XOR<XOR<VerbUpdateToOneWithWhereWithoutFuturePerfectInput, VerbUpdateWithoutFuturePerfectInput>, VerbUncheckedUpdateWithoutFuturePerfectInput>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10944,33 +10561,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -10990,14 +10580,26 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type PresentCreateWithoutVerbInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentUncheckedCreateWithoutVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -11014,13 +10616,14 @@ export namespace Prisma {
   }
 
   export type PresentPerfectCreateWithoutVerbInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentPerfectUncheckedCreateWithoutVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -11037,13 +10640,14 @@ export namespace Prisma {
   }
 
   export type PastCreateWithoutVerbInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastUncheckedCreateWithoutVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -11060,13 +10664,14 @@ export namespace Prisma {
   }
 
   export type PastPerfectCreateWithoutVerbInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastPerfectUncheckedCreateWithoutVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -11083,13 +10688,14 @@ export namespace Prisma {
   }
 
   export type FutureCreateWithoutVerbInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FutureUncheckedCreateWithoutVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -11106,13 +10712,14 @@ export namespace Prisma {
   }
 
   export type FuturePerfectCreateWithoutVerbInput = {
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FuturePerfectUncheckedCreateWithoutVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
@@ -11148,8 +10755,8 @@ export namespace Prisma {
     AND?: PresentScalarWhereInput | PresentScalarWhereInput[]
     OR?: PresentScalarWhereInput[]
     NOT?: PresentScalarWhereInput | PresentScalarWhereInput[]
-    id?: IntFilter<"Present"> | number
-    verbId?: IntFilter<"Present"> | number
+    id?: StringFilter<"Present"> | string
+    verbId?: StringFilter<"Present"> | string
     germanVerb?: StringFilter<"Present"> | string
     germanSentence?: StringFilter<"Present"> | string
     audio?: StringFilter<"Present"> | string
@@ -11175,8 +10782,8 @@ export namespace Prisma {
     AND?: PresentPerfectScalarWhereInput | PresentPerfectScalarWhereInput[]
     OR?: PresentPerfectScalarWhereInput[]
     NOT?: PresentPerfectScalarWhereInput | PresentPerfectScalarWhereInput[]
-    id?: IntFilter<"PresentPerfect"> | number
-    verbId?: IntFilter<"PresentPerfect"> | number
+    id?: StringFilter<"PresentPerfect"> | string
+    verbId?: StringFilter<"PresentPerfect"> | string
     germanVerb?: StringFilter<"PresentPerfect"> | string
     germanSentence?: StringFilter<"PresentPerfect"> | string
     audio?: StringFilter<"PresentPerfect"> | string
@@ -11202,8 +10809,8 @@ export namespace Prisma {
     AND?: PastScalarWhereInput | PastScalarWhereInput[]
     OR?: PastScalarWhereInput[]
     NOT?: PastScalarWhereInput | PastScalarWhereInput[]
-    id?: IntFilter<"Past"> | number
-    verbId?: IntFilter<"Past"> | number
+    id?: StringFilter<"Past"> | string
+    verbId?: StringFilter<"Past"> | string
     germanVerb?: StringFilter<"Past"> | string
     germanSentence?: StringFilter<"Past"> | string
     audio?: StringFilter<"Past"> | string
@@ -11229,8 +10836,8 @@ export namespace Prisma {
     AND?: PastPerfectScalarWhereInput | PastPerfectScalarWhereInput[]
     OR?: PastPerfectScalarWhereInput[]
     NOT?: PastPerfectScalarWhereInput | PastPerfectScalarWhereInput[]
-    id?: IntFilter<"PastPerfect"> | number
-    verbId?: IntFilter<"PastPerfect"> | number
+    id?: StringFilter<"PastPerfect"> | string
+    verbId?: StringFilter<"PastPerfect"> | string
     germanVerb?: StringFilter<"PastPerfect"> | string
     germanSentence?: StringFilter<"PastPerfect"> | string
     audio?: StringFilter<"PastPerfect"> | string
@@ -11256,8 +10863,8 @@ export namespace Prisma {
     AND?: FutureScalarWhereInput | FutureScalarWhereInput[]
     OR?: FutureScalarWhereInput[]
     NOT?: FutureScalarWhereInput | FutureScalarWhereInput[]
-    id?: IntFilter<"Future"> | number
-    verbId?: IntFilter<"Future"> | number
+    id?: StringFilter<"Future"> | string
+    verbId?: StringFilter<"Future"> | string
     germanVerb?: StringFilter<"Future"> | string
     germanSentence?: StringFilter<"Future"> | string
     audio?: StringFilter<"Future"> | string
@@ -11283,14 +10890,15 @@ export namespace Prisma {
     AND?: FuturePerfectScalarWhereInput | FuturePerfectScalarWhereInput[]
     OR?: FuturePerfectScalarWhereInput[]
     NOT?: FuturePerfectScalarWhereInput | FuturePerfectScalarWhereInput[]
-    id?: IntFilter<"FuturePerfect"> | number
-    verbId?: IntFilter<"FuturePerfect"> | number
+    id?: StringFilter<"FuturePerfect"> | string
+    verbId?: StringFilter<"FuturePerfect"> | string
     germanVerb?: StringFilter<"FuturePerfect"> | string
     germanSentence?: StringFilter<"FuturePerfect"> | string
     audio?: StringFilter<"FuturePerfect"> | string
   }
 
   export type VerbCreateWithoutPresentInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     presentPerfect?: PresentPerfectCreateNestedManyWithoutVerbInput
@@ -11301,7 +10909,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateWithoutPresentInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     presentPerfect?: PresentPerfectUncheckedCreateNestedManyWithoutVerbInput
@@ -11328,6 +10936,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateWithoutPresentInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     presentPerfect?: PresentPerfectUpdateManyWithoutVerbNestedInput
@@ -11338,7 +10947,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateWithoutPresentInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     presentPerfect?: PresentPerfectUncheckedUpdateManyWithoutVerbNestedInput
@@ -11349,6 +10958,7 @@ export namespace Prisma {
   }
 
   export type VerbCreateWithoutPresentPerfectInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentCreateNestedManyWithoutVerbInput
@@ -11359,7 +10969,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateWithoutPresentPerfectInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentUncheckedCreateNestedManyWithoutVerbInput
@@ -11386,6 +10996,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateWithoutPresentPerfectInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUpdateManyWithoutVerbNestedInput
@@ -11396,7 +11007,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateWithoutPresentPerfectInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUncheckedUpdateManyWithoutVerbNestedInput
@@ -11407,6 +11018,7 @@ export namespace Prisma {
   }
 
   export type VerbCreateWithoutPastInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentCreateNestedManyWithoutVerbInput
@@ -11417,7 +11029,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateWithoutPastInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentUncheckedCreateNestedManyWithoutVerbInput
@@ -11444,6 +11056,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateWithoutPastInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUpdateManyWithoutVerbNestedInput
@@ -11454,7 +11067,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateWithoutPastInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUncheckedUpdateManyWithoutVerbNestedInput
@@ -11465,6 +11078,7 @@ export namespace Prisma {
   }
 
   export type VerbCreateWithoutPastPerfectInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentCreateNestedManyWithoutVerbInput
@@ -11475,7 +11089,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateWithoutPastPerfectInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentUncheckedCreateNestedManyWithoutVerbInput
@@ -11502,6 +11116,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateWithoutPastPerfectInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUpdateManyWithoutVerbNestedInput
@@ -11512,7 +11127,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateWithoutPastPerfectInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUncheckedUpdateManyWithoutVerbNestedInput
@@ -11523,6 +11138,7 @@ export namespace Prisma {
   }
 
   export type VerbCreateWithoutFutureInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentCreateNestedManyWithoutVerbInput
@@ -11533,7 +11149,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateWithoutFutureInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentUncheckedCreateNestedManyWithoutVerbInput
@@ -11560,6 +11176,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateWithoutFutureInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUpdateManyWithoutVerbNestedInput
@@ -11570,7 +11187,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateWithoutFutureInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUncheckedUpdateManyWithoutVerbNestedInput
@@ -11581,6 +11198,7 @@ export namespace Prisma {
   }
 
   export type VerbCreateWithoutFuturePerfectInput = {
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentCreateNestedManyWithoutVerbInput
@@ -11591,7 +11209,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedCreateWithoutFuturePerfectInput = {
-    id?: number
+    id?: string
     englishVerb: string
     englishSentence: string
     present?: PresentUncheckedCreateNestedManyWithoutVerbInput
@@ -11618,6 +11236,7 @@ export namespace Prisma {
   }
 
   export type VerbUpdateWithoutFuturePerfectInput = {
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUpdateManyWithoutVerbNestedInput
@@ -11628,7 +11247,7 @@ export namespace Prisma {
   }
 
   export type VerbUncheckedUpdateWithoutFuturePerfectInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     englishVerb?: StringFieldUpdateOperationsInput | string
     englishSentence?: StringFieldUpdateOperationsInput | string
     present?: PresentUncheckedUpdateManyWithoutVerbNestedInput
@@ -11639,162 +11258,168 @@ export namespace Prisma {
   }
 
   export type PresentCreateManyVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentPerfectCreateManyVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastCreateManyVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PastPerfectCreateManyVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FutureCreateManyVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type FuturePerfectCreateManyVerbInput = {
-    id?: number
+    id?: string
     germanVerb: string
     germanSentence: string
     audio: string
   }
 
   export type PresentUpdateWithoutVerbInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentUncheckedUpdateWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentUncheckedUpdateManyWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentPerfectUpdateWithoutVerbInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentPerfectUncheckedUpdateWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PresentPerfectUncheckedUpdateManyWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastUpdateWithoutVerbInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastUncheckedUpdateWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastUncheckedUpdateManyWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastPerfectUpdateWithoutVerbInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastPerfectUncheckedUpdateWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type PastPerfectUncheckedUpdateManyWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FutureUpdateWithoutVerbInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FutureUncheckedUpdateWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FutureUncheckedUpdateManyWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FuturePerfectUpdateWithoutVerbInput = {
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FuturePerfectUncheckedUpdateWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string
   }
 
   export type FuturePerfectUncheckedUpdateManyWithoutVerbInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     germanVerb?: StringFieldUpdateOperationsInput | string
     germanSentence?: StringFieldUpdateOperationsInput | string
     audio?: StringFieldUpdateOperationsInput | string

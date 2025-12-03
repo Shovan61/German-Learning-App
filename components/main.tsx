@@ -118,11 +118,11 @@ function Main() {
         audioUrlForFuture: audioUrlForFuture,
         audioUrlForFuturePerfect: audioUrlForFuturePerfect,
       };
-      console.log("Success:", body);
+
       const response = await axiosInstance.post("/submit-form", body);
       if (response.status === 200) {
         message.success("Saved successfully");
-        console.log(response.data);
+        handleCancel();
       } else {
         message.error("Could not save data!");
       }
