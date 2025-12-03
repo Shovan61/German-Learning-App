@@ -1,5 +1,5 @@
 import { client } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const origin = {
   headers: {
@@ -9,13 +9,23 @@ const origin = {
   },
 };
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-  
-    return NextResponse.json(
-      { status: 200, data: [{ data: "Apple" }] },
-      origin
-    );
+    const response = await client.verb.findMany({
+      include: {
+        present: true,
+        presentPerfect: true,
+        past: true,
+        pastPerfect: true,
+        future: true,
+        futurePerfect: true,
+      },
+    });
+    if (response) {
+      return NextResponse.json({ status: 200, data: response }, origin);
+    } else {
+      return NextResponse.json({ status: 404, data: undefined }, origin);
+    }
   } catch (error) {
     console.log(error);
     throw new Error("Error while fetching user information request for List");

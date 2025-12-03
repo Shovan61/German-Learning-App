@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -9,10 +10,13 @@ import {
   FormProps,
   Divider,
   message,
+  Spin,
+  Table,
 } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
+import NestedTable from "./test";
 
 export type FieldType = {
   verb: string;
@@ -55,17 +59,36 @@ function Main() {
   const [audioUrlForFuturePerfect, setAudioUrlForFuturePerfect] = useState<
     string | null
   >(null);
-  const [dataSource, setdataSource] = useState([]);
+  // const [dataSource, setdataSource] = useState([]);
+  const dataSource = Array.from({ length: 100 }).map((_, i) => ({
+    key: i,
+    name: "John Brown",
+    age: i + 1,
+    street: "Lake Park",
+    building: "C",
+    number: 2035,
+    companyAddress: "Lake Street 42",
+    companyName: "SoftLake Co",
+    gender: "M",
+  }));
   const [open, setOpen] = useState(false);
   const [isTableLoading, setisTableLoading] = useState(false);
   const [isModalLoading, setisModalLoading] = useState(false);
 
   const getListData = async () => {
     try {
+      setisTableLoading(true);
       const response = await axiosInstance.get("/list");
-      console.log(response, "===========response=============");
+      if (response.status === 200) {
+        console.log(response.data.data, "===========response=============");
+      } else {
+        message.error("Cant fetch data");
+      }
     } catch (error) {
       console.log(error);
+      message.error("Something went wrong while fetching data");
+    } finally {
+      setisTableLoading(false);
     }
   };
 
@@ -107,8 +130,93 @@ function Main() {
     setAudioUrlForFuturePerfect(null);
   };
 
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: 100,
+      fixed: "start",
+      filters: [
+        {
+          text: "Joe",
+          value: "Joe",
+        },
+        {
+          text: "John",
+          value: "John",
+        },
+      ],
+      onFilter: (value, record) => record.name.indexOf(value) === 0,
+    },
+    {
+      title: "Other",
+      children: [
+        {
+          title: "Age",
+          dataIndex: "age",
+          key: "age",
+          width: 150,
+          sorter: (a, b) => a.age - b.age,
+        },
+        {
+          title: "Address",
+          children: [
+            {
+              title: "Street",
+              dataIndex: "street",
+              key: "street",
+              width: 150,
+            },
+            {
+              title: "Block",
+              children: [
+                {
+                  title: "Building",
+                  dataIndex: "building",
+                  key: "building",
+                  width: 100,
+                },
+                {
+                  title: "Door No.",
+                  dataIndex: "number",
+                  key: "number",
+                  width: 100,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: "Company",
+      children: [
+        {
+          title: "Company Address",
+          dataIndex: "companyAddress",
+          key: "companyAddress",
+          width: 200,
+        },
+        {
+          title: "Company Name",
+          dataIndex: "companyName",
+          key: "companyName",
+        },
+      ],
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      key: "gender",
+      width: 80,
+      fixed: "end",
+    },
+  ];
+
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
+      setisModalLoading(true);
       const body = {
         ...values,
         audioUrlForPresent: audioUrlForPresent,
@@ -123,12 +231,15 @@ function Main() {
       if (response.status === 200) {
         message.success("Saved successfully");
         handleCancel();
+        getListData();
       } else {
         message.error("Could not save data!");
       }
     } catch (error) {
       console.log(error);
       message.error("Something went wrong!");
+    } finally {
+      setisModalLoading(false);
     }
   };
 
@@ -160,359 +271,374 @@ function Main() {
           </Button>,
         ]}
       >
-        <Form
-          form={form}
-          name="Word"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Divider>English</Divider>
-          <Form.Item<FieldType>
-            label="English Verb"
-            name="verb"
-            rules={[{ required: true, message: "Please input English Verb!" }]}
-            layout="vertical"
+        <Spin spinning={isModalLoading}>
+          <Form
+            form={form}
+            name="Word"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Input />
-          </Form.Item>
+            <Divider>English</Divider>
+            <Form.Item<FieldType>
+              label="English Verb"
+              name="verb"
+              rules={[
+                { required: true, message: "Please input English Verb!" },
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item<FieldType>
-            label="English Sentence"
-            name="sentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your English Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Divider />
-
-          <Divider>German Present</Divider>
-
-          {/* Present */}
-          <Form.Item<FieldType>
-            label="German Present Tense Verb"
-            name="germanPresentVerb"
-            rules={[{ required: true, message: "Please input  Verb!" }]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Present Tense Sentence"
-            name="germanPresentSentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Present Tense Sentence Audio"
-            name="audioUrlForPresent"
-            rules={[
-              {
-                message: "Please input your Audio!",
-                validator: (_, value) => {
-                  if (audioUrlForPresent && audioUrlForPresent?.length > 0) {
-                    return Promise.resolve();
-                  } else {
-                    return Promise.reject("audioUrlForPresent");
-                  }
+            <Form.Item<FieldType>
+              label="English Sentence"
+              name="sentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your English Sentence!",
                 },
-              },
-            ]}
-            layout="vertical"
-          >
-            <UploadAudio
-              audioUrl={audioUrlForPresent}
-              setAudioUrl={setAudioUrlForPresent}
-            />
-          </Form.Item>
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Divider />
+            <Divider />
 
-          <Divider>German Present Perfect</Divider>
+            <Divider>German Present</Divider>
 
-          {/* Present Perfect */}
-          <Form.Item<FieldType>
-            label="German Present Perfect Tense Verb"
-            name="germanPresentPerfectVerb"
-            rules={[{ required: true, message: "Please input Verb!" }]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
+            {/* Present */}
+            <Form.Item<FieldType>
+              label="German Present Tense Verb"
+              name="germanPresentVerb"
+              rules={[{ required: true, message: "Please input  Verb!" }]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item<FieldType>
-            label="German Present Perfect Tense Sentence"
-            name="germanPresentPerfectSentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Present Tense Sentence Audio"
-            name="audioUrlForPresentPerfect"
-            rules={[
-              {
-                message: "Please input your Audio!",
-                validator: (_, value) => {
-                  if (
-                    audioUrlForPresentPerfect &&
-                    audioUrlForPresentPerfect?.length > 0
-                  ) {
-                    return Promise.resolve();
-                  } else {
-                    return Promise.reject("audioUrlForPresentPerfect");
-                  }
+            <Form.Item<FieldType>
+              label="German Present Tense Sentence"
+              name="germanPresentSentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Sentence!",
                 },
-              },
-            ]}
-            layout="vertical"
-          >
-            <UploadAudio
-              audioUrl={audioUrlForPresentPerfect}
-              setAudioUrl={setAudioUrlForPresentPerfect}
-            />
-          </Form.Item>
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Divider />
-
-          <Divider>German Past</Divider>
-
-          {/* Past */}
-          <Form.Item<FieldType>
-            label="German Past Tense Verb"
-            name="germanPastVerb"
-            rules={[{ required: true, message: "Please input Verb!" }]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Past Tense Sentence"
-            name="germanPastSentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Past Sentence Audio"
-            name="audioUrlForPast"
-            rules={[
-              {
-                message: "Please input your Audio!",
-                validator: (_, value) => {
-                  if (audioUrlForPast && audioUrlForPast?.length > 0) {
-                    return Promise.resolve();
-                  } else {
-                    return Promise.reject("audioUrlForPast");
-                  }
+            <Form.Item<FieldType>
+              label="German Present Tense Sentence Audio"
+              name="audioUrlForPresent"
+              rules={[
+                {
+                  message: "Please input your Audio!",
+                  validator: (_, value) => {
+                    if (audioUrlForPresent && audioUrlForPresent?.length > 0) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject("audioUrlForPresent");
+                    }
+                  },
                 },
-              },
-            ]}
-            layout="vertical"
-          >
-            <UploadAudio
-              audioUrl={audioUrlForPast}
-              setAudioUrl={setAudioUrlForPast}
-            />
-          </Form.Item>
+              ]}
+              layout="vertical"
+            >
+              <UploadAudio
+                audioUrl={audioUrlForPresent}
+                setAudioUrl={setAudioUrlForPresent}
+              />
+            </Form.Item>
 
-          <Divider>German Past Perfect</Divider>
+            <Divider />
 
-          {/* Past Perfect */}
-          <Form.Item<FieldType>
-            label="German Past Perfect Tense Verb"
-            name="germanPastPerfectVerb"
-            rules={[{ required: true, message: "Please input Verb!" }]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
+            <Divider>German Present Perfect</Divider>
 
-          <Form.Item<FieldType>
-            label="German Past Perfect Tense Sentence"
-            name="germanPastPerfectSentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
+            {/* Present Perfect */}
+            <Form.Item<FieldType>
+              label="German Present Perfect Tense Verb"
+              name="germanPresentPerfectVerb"
+              rules={[{ required: true, message: "Please input Verb!" }]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item<FieldType>
-            label="German Past Perfect Sentence Audio"
-            name="audioUrlForPastPerfect"
-            rules={[
-              {
-                message: "Please input your Audio!",
-                validator: (_, value) => {
-                  if (
-                    audioUrlForPastPerfect &&
-                    audioUrlForPastPerfect?.length > 0
-                  ) {
-                    return Promise.resolve();
-                  } else {
-                    return Promise.reject("audioUrlForPastPerfect");
-                  }
+            <Form.Item<FieldType>
+              label="German Present Perfect Tense Sentence"
+              name="germanPresentPerfectSentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Sentence!",
                 },
-              },
-            ]}
-            layout="vertical"
-          >
-            <UploadAudio
-              audioUrl={audioUrlForPastPerfect}
-              setAudioUrl={setAudioUrlForPastPerfect}
-            />
-          </Form.Item>
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Divider />
-
-          <Divider>German Future</Divider>
-
-          {/* Future */}
-          <Form.Item<FieldType>
-            label="German Future Tense Verb"
-            name="germanFutureVerb"
-            rules={[{ required: true, message: "Please input Verb!" }]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Future Tense Sentence"
-            name="germanFutureSentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Future Sentence Audio"
-            name="audioUrlForFuture"
-            rules={[
-              {
-                message: "Please input your Audio!",
-                validator: (_, value) => {
-                  if (audioUrlForFuture && audioUrlForFuture?.length > 0) {
-                    return Promise.resolve();
-                  } else {
-                    return Promise.reject("audioUrlForFuture");
-                  }
+            <Form.Item<FieldType>
+              label="German Present Tense Sentence Audio"
+              name="audioUrlForPresentPerfect"
+              rules={[
+                {
+                  message: "Please input your Audio!",
+                  validator: (_, value) => {
+                    if (
+                      audioUrlForPresentPerfect &&
+                      audioUrlForPresentPerfect?.length > 0
+                    ) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject("audioUrlForPresentPerfect");
+                    }
+                  },
                 },
-              },
-            ]}
-            layout="vertical"
-          >
-            <UploadAudio
-              audioUrl={audioUrlForFuture}
-              setAudioUrl={setAudioUrlForFuture}
-            />
-          </Form.Item>
+              ]}
+              layout="vertical"
+            >
+              <UploadAudio
+                audioUrl={audioUrlForPresentPerfect}
+                setAudioUrl={setAudioUrlForPresentPerfect}
+              />
+            </Form.Item>
 
-          <Divider />
+            <Divider />
 
-          <Divider>German Future Perfect</Divider>
+            <Divider>German Past</Divider>
 
-          {/* Future Perfect*/}
-          <Form.Item<FieldType>
-            label="German Future Perfect Tense Verb"
-            name="germanFuturePerfectVerb"
-            rules={[{ required: true, message: "Please input Verb!" }]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
+            {/* Past */}
+            <Form.Item<FieldType>
+              label="German Past Tense Verb"
+              name="germanPastVerb"
+              rules={[{ required: true, message: "Please input Verb!" }]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item<FieldType>
-            label="German Future Tense Sentence"
-            name="germanFuturePerfectSentence"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Sentence!",
-              },
-            ]}
-            layout="vertical"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="German Future Sentence Audio"
-            name="audioUrlForFuturePerfect"
-            rules={[
-              {
-                message: "Please input your Audio!",
-                validator: (_, value) => {
-                  if (
-                    audioUrlForFuturePerfect &&
-                    audioUrlForFuturePerfect?.length > 0
-                  ) {
-                    return Promise.resolve();
-                  } else {
-                    return Promise.reject("audioUrlForFuturePerfect");
-                  }
+            <Form.Item<FieldType>
+              label="German Past Tense Sentence"
+              name="germanPastSentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Sentence!",
                 },
-              },
-            ]}
-            layout="vertical"
-          >
-            <UploadAudio
-              audioUrl={audioUrlForFuturePerfect}
-              setAudioUrl={setAudioUrlForFuturePerfect}
-            />
-          </Form.Item>
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item<FieldType>
+              label="German Past Sentence Audio"
+              name="audioUrlForPast"
+              rules={[
+                {
+                  message: "Please input your Audio!",
+                  validator: (_, value) => {
+                    if (audioUrlForPast && audioUrlForPast?.length > 0) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject("audioUrlForPast");
+                    }
+                  },
+                },
+              ]}
+              layout="vertical"
+            >
+              <UploadAudio
+                audioUrl={audioUrlForPast}
+                setAudioUrl={setAudioUrlForPast}
+              />
+            </Form.Item>
+
+            <Divider>German Past Perfect</Divider>
+
+            {/* Past Perfect */}
+            <Form.Item<FieldType>
+              label="German Past Perfect Tense Verb"
+              name="germanPastPerfectVerb"
+              rules={[{ required: true, message: "Please input Verb!" }]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="German Past Perfect Tense Sentence"
+              name="germanPastPerfectSentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Sentence!",
+                },
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="German Past Perfect Sentence Audio"
+              name="audioUrlForPastPerfect"
+              rules={[
+                {
+                  message: "Please input your Audio!",
+                  validator: (_, value) => {
+                    if (
+                      audioUrlForPastPerfect &&
+                      audioUrlForPastPerfect?.length > 0
+                    ) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject("audioUrlForPastPerfect");
+                    }
+                  },
+                },
+              ]}
+              layout="vertical"
+            >
+              <UploadAudio
+                audioUrl={audioUrlForPastPerfect}
+                setAudioUrl={setAudioUrlForPastPerfect}
+              />
+            </Form.Item>
+
+            <Divider />
+
+            <Divider>German Future</Divider>
+
+            {/* Future */}
+            <Form.Item<FieldType>
+              label="German Future Tense Verb"
+              name="germanFutureVerb"
+              rules={[{ required: true, message: "Please input Verb!" }]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="German Future Tense Sentence"
+              name="germanFutureSentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Sentence!",
+                },
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="German Future Sentence Audio"
+              name="audioUrlForFuture"
+              rules={[
+                {
+                  message: "Please input your Audio!",
+                  validator: (_, value) => {
+                    if (audioUrlForFuture && audioUrlForFuture?.length > 0) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject("audioUrlForFuture");
+                    }
+                  },
+                },
+              ]}
+              layout="vertical"
+            >
+              <UploadAudio
+                audioUrl={audioUrlForFuture}
+                setAudioUrl={setAudioUrlForFuture}
+              />
+            </Form.Item>
+
+            <Divider />
+
+            <Divider>German Future Perfect</Divider>
+
+            {/* Future Perfect*/}
+            <Form.Item<FieldType>
+              label="German Future Perfect Tense Verb"
+              name="germanFuturePerfectVerb"
+              rules={[{ required: true, message: "Please input Verb!" }]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="German Future Tense Sentence"
+              name="germanFuturePerfectSentence"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Sentence!",
+                },
+              ]}
+              layout="vertical"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+              label="German Future Sentence Audio"
+              name="audioUrlForFuturePerfect"
+              rules={[
+                {
+                  message: "Please input your Audio!",
+                  validator: (_, value) => {
+                    if (
+                      audioUrlForFuturePerfect &&
+                      audioUrlForFuturePerfect?.length > 0
+                    ) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject("audioUrlForFuturePerfect");
+                    }
+                  },
+                },
+              ]}
+              layout="vertical"
+            >
+              <UploadAudio
+                audioUrl={audioUrlForFuturePerfect}
+                setAudioUrl={setAudioUrlForFuturePerfect}
+              />
+            </Form.Item>
+
+            <Form.Item label={null}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Spin>
       </Modal>
       {/* End of Modal */}
+      <Spin spinning={isTableLoading}>
+        {/* <Table
+          // className={styles.customTable}
+          columns={columns}
+          dataSource={dataSource}
+          bordered
+          size="middle"
+          scroll={{ x: "calc(700px + 50%)", y: 47 * 5 }}
+        /> */}
+        <NestedTable />
+      </Spin>
     </Card>
   );
 }
