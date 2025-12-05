@@ -1,66 +1,68 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import {
+  message,
+  Table,
+  Popconfirm,
+  PopconfirmProps,
+  Input,
+  Button,
+} from "antd";
+import { DeleteFilled } from "@ant-design/icons";
+import { deleteFunction } from "@/lib/query";
 
-// Assuming you fetch the data from Prisma or any API
-// const exampleData = [
-//   {
-//     id: "uuid1",
-//     englishVerb: "run",
-//     englishSentence: "I run every day.",
-//     present: [
-//       {
-//         tense: "Present",
-//         germanVerb: "laufen",
-//         germanSentence: "Ich laufe jeden Tag.",
-//         audio: "audio_url_for_present",
-//       },
-//     ],
-//     presentPerfect: [
-//       {
-//         tense: "Present Perfect",
-//         germanVerb: "gelaufen",
-//         germanSentence: "Ich bin gelaufen.",
-//         audio: "audio_url_for_present_perfect",
-//       },
-//     ],
-//     past: [
-//       {
-//         tense: "Past",
-//         germanVerb: "lief",
-//         germanSentence: "Ich lief gestern.",
-//         audio: "audio_url_for_past",
-//       },
-//     ],
-//     pastPerfect: [
-//       {
-//         tense: "Past Perfect",
-//         germanVerb: "gewesen",
-//         germanSentence: "Ich war gelaufen.",
-//         audio: "audio_url_for_past_perfect",
-//       },
-//     ],
-//     future: [
-//       {
-//         tense: "Future", // Added tense information
-//         germanVerb: "werden laufen",
-//         germanSentence: "Ich werde laufen.",
-//         audio: "audio_url_for_future",
-//       },
-//     ],
-//     futurePerfect: [
-//       {
-//         tense: "Future Perfect", // Added tense information
-//         germanVerb: "wird gelaufen sein",
-//         germanSentence: "Es wird gelaufen sein.",
-//         audio: "audio_url_for_future_perfect",
-//       },
-//     ],
-//   },
-//   // Add more verb objects as necessary...
-// ];
+const VerbTable = ({
+  dataSource,
+  getListData,
+}: {
+  dataSource: any[];
+  getListData: () => void;
+}) => {
+  const [messageApi, holder] = message.useMessage();
+  const [code, setCode] = useState("");
+  const secretCode = "9272";
 
-const VerbTable = ({ dataSource }: { dataSource: any[] }) => {
+  const confirm: PopconfirmProps["onConfirm"] = (e) => {
+    if (code !== secretCode) return messageApi.error("Code do not match");
+    handleDelete(e);
+    setCode("");
+  };
+
+  const cancel: PopconfirmProps["onCancel"] = (e) => {
+    console.log(e);
+    setCode("");
+  };
+
+  const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const enteredCode = e.target.value;
+    setCode(enteredCode);
+  };
+
+  const customPopconfirmContent = (
+    <div>
+      <p>Are you sure to delete this verb?</p>
+      <Input
+        placeholder="Enter code to confirm"
+        value={code}
+        onChange={handleCodeChange}
+        style={{ marginBottom: 10 }}
+      />
+    </div>
+  );
+
+  const handleDelete = async (record: any) => {
+    try {
+      const response = await deleteFunction(record.id);
+      if (response.status === 200) {
+        getListData();
+        return messageApi.success("Successfully Deleted!");
+      }
+      return messageApi.error("Can not delete!");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    }
+  };
   const parentColumns = [
     {
       title: "English Verb",
@@ -71,6 +73,25 @@ const VerbTable = ({ dataSource }: { dataSource: any[] }) => {
       title: "English Sentence",
       dataIndex: "englishSentence",
       key: "englishSentence",
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (_: any, record: any) => (
+        <>
+          {holder}
+          <Popconfirm
+            title={customPopconfirmContent}
+            onConfirm={() => confirm(record)}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button danger>Delete</Button>{" "}
+          </Popconfirm>
+        </>
+      ),
     },
   ];
 

@@ -95,8 +95,7 @@ function Main() {
           };
           return result;
         });
-        setdataSource(refactoredData)
-        console.log(refactoredData, "===========response=============");
+        setdataSource(refactoredData);
       } else {
         message.error("Cant fetch data");
       }
@@ -561,7 +560,7 @@ function Main() {
       </Modal>
       {/* End of Modal */}
       <Spin spinning={isTableLoading}>
-        <VerbTable dataSource={dataSource} />
+        <VerbTable dataSource={dataSource} getListData={getListData}/>
       </Spin>
     </Card>
   );
