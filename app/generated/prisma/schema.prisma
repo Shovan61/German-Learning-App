@@ -31,7 +31,7 @@ model Present {
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
@@ -40,7 +40,7 @@ model PresentPerfect {
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
@@ -49,7 +49,7 @@ model Past {
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
@@ -58,7 +58,7 @@ model PastPerfect {
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
@@ -67,7 +67,7 @@ model Future {
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
@@ -76,6 +76,6 @@ model FuturePerfect {
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }

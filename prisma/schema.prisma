@@ -15,7 +15,7 @@ datasource db {
 }
 
 model Verb {
-  id              String               @id @default(uuid())
+  id              String           @id @default(uuid())
   englishVerb     String
   englishSentence String
   present         Present[]
@@ -27,55 +27,55 @@ model Verb {
 }
 
 model Present {
-  id             String     @id @default(uuid())
+  id             String @id @default(uuid())
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
 model PresentPerfect {
-  id             String     @id @default(uuid())
+  id             String @id @default(uuid())
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
 model Past {
-  id             String     @id @default(uuid())
+  id             String @id @default(uuid())
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
 model PastPerfect {
-  id             String     @id @default(uuid())
+  id             String @id @default(uuid())
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
 model Future {
-  id             String     @id @default(uuid())
+  id             String @id @default(uuid())
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }
 
 model FuturePerfect {
-  id             String     @id @default(uuid())
+  id             String @id @default(uuid())
   verbId         String
   germanVerb     String
   germanSentence String
-  verb           Verb   @relation(fields: [verbId], references: [id])
+  verb           Verb   @relation(fields: [verbId], references: [id], onDelete: Cascade)
   audio          String
 }

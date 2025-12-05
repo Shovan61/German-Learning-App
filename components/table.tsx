@@ -125,25 +125,29 @@ const VerbTable = ({
   ];
 
   // Generate expanded row data for each verb (for child rows)
-  const expandedRowRender = (record: any) => {
-    const childData = [
-      ...record?.present,
-      ...record?.presentPerfect,
-      ...record?.past,
-      ...record?.pastPerfect,
-      ...record?.future,
-      ...record?.futurePerfect,
-    ];
+ const expandedRowRender = (record: any) => {
+  const childData = [
+    ...record?.present,
+    ...record?.presentPerfect,
+    ...record?.past,
+    ...record?.pastPerfect,
+    ...record?.future,
+    ...record?.futurePerfect,
+  ];
 
-    return (
-      <Table
-        key={"child-table"}
-        columns={childColumns}
-        dataSource={childData}
-        pagination={false}
-      />
-    );
-  };
+  return (
+    <Table
+      key={`child-table-${record.id}`}
+      columns={childColumns}
+      dataSource={childData.map((child, index) => ({
+        ...child,
+        key: `child-${record.id}-${index}`, // Add a unique key for each row
+      }))}
+      pagination={false}
+    />
+  );
+};
+
 
   return (
     <Table
