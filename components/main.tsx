@@ -18,6 +18,7 @@ import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
 import VerbTable from "./table";
 
+
 export type FieldType = {
   verb: string;
   sentence: string;
@@ -560,7 +561,18 @@ function Main() {
       </Modal>
       {/* End of Modal */}
       <Spin spinning={isTableLoading}>
-        <VerbTable dataSource={dataSource} getListData={getListData}/>
+        <VerbTable
+          dataSource={dataSource}
+          getListData={getListData}
+          setOpen={setOpen}
+          form={form}
+          setAudioUrlForPresent={setAudioUrlForPresent}
+          setAudioUrlForPresentPerfect={setAudioUrlForPresentPerfect}
+          setAudioUrlForPast={setAudioUrlForPresentPerfect}
+          setAudioUrlForPastPerfect={setAudioUrlForPastPerfect}
+          setAudioUrlForFuture={setAudioUrlForFuture}
+          setAudioUrlForFuturePerfect={setAudioUrlForFuturePerfect}
+        />
       </Spin>
     </Card>
   );
