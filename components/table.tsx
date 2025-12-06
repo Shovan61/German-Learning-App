@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   message,
   Table,
@@ -22,6 +22,7 @@ const VerbTable = ({
   setAudioUrlForPastPerfect,
   setAudioUrlForPresent,
   setAudioUrlForPresentPerfect,
+  setverbIdForEdit,
 }: {
   dataSource: any[];
   getListData: () => void;
@@ -33,6 +34,7 @@ const VerbTable = ({
   setAudioUrlForPastPerfect: (value: string) => void;
   setAudioUrlForFuture: (value: string) => void;
   setAudioUrlForFuturePerfect: (value: string) => void;
+  setverbIdForEdit: (value: string) => void;
 }) => {
   const [messageApi, holder] = message.useMessage();
   const [code, setCode] = useState("");
@@ -97,6 +99,7 @@ const VerbTable = ({
     setAudioUrlForFuture(record.future[0].audio);
     setAudioUrlForFuturePerfect(record.futurePerfect[0].audio);
     setOpen(true);
+    setverbIdForEdit(record.id);
     setCode("");
   };
 

@@ -17,6 +17,7 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
 import VerbTable from "./table";
+import { editFunction } from "@/lib/query";
 
 export type FieldType = {
   verb: string;
@@ -64,6 +65,7 @@ function Main() {
   const [open, setOpen] = useState(false);
   const [isTableLoading, setisTableLoading] = useState(false);
   const [isModalLoading, setisModalLoading] = useState(false);
+  const [verbIdForEdit, setverbIdForEdit] = useState<string | null>(null);
 
   const getListData = async () => {
     try {
@@ -143,11 +145,26 @@ function Main() {
 
     setAudioUrlForFuture(null);
     setAudioUrlForFuturePerfect(null);
+    setverbIdForEdit(null);
   };
+  console.log(verbIdForEdit, "verbIdForEdit");
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
       setisModalLoading(true);
+
+      if (
+        !audioUrlForPresent ||
+        !audioUrlForPresentPerfect ||
+        !audioUrlForPast ||
+        !audioUrlForPastPerfect ||
+        !audioUrlForFuture ||
+        !audioUrlForFuturePerfect
+      ) {
+        message.error("Audio is missing somewhere!");
+        return;
+      }
+
       const body = {
         ...values,
         audioUrlForPresent: audioUrlForPresent,
@@ -158,7 +175,14 @@ function Main() {
         audioUrlForFuturePerfect: audioUrlForFuturePerfect,
       };
 
-      const response = await axiosInstance.post("/submit-form", body);
+      let response;
+
+      if (verbIdForEdit) {
+        response = await editFunction(verbIdForEdit, body);
+      } else {
+        response = await axiosInstance.post("/submit-form", body);
+      }
+
       if (response.status === 200) {
         message.success("Saved successfully");
         handleCancel();
@@ -577,6 +601,7 @@ function Main() {
           setAudioUrlForPastPerfect={setAudioUrlForPastPerfect}
           setAudioUrlForFuture={setAudioUrlForFuture}
           setAudioUrlForFuturePerfect={setAudioUrlForFuturePerfect}
+          setverbIdForEdit={setverbIdForEdit}
         />
       </Spin>
     </Card>

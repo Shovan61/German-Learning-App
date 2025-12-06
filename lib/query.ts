@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import { FieldType } from "@/components/main";
 import { client } from "./prisma";
 
 export const deleteFunction = async (verbId: string) => {
@@ -22,30 +22,111 @@ export const deleteFunction = async (verbId: string) => {
   }
 };
 
-export const editFunction = async (
-  verbId: string,
-  data: FieldType,
-  code: string
-) => {
+export const editFunction = async (verbId: string, data: any) => {
   try {
-    if (code !== "9272") {
-      return { status: 404, data: "Code not matched" };
+    // Check if the verb exists
+    const verbExists = await client.verb.findUnique({
+      where: {
+        id: verbId,
+      },
+    });
+
+    if (!verbExists) {
+      return { status: 404, data: "Verb not found" };
     }
 
+    // Perform the update operation
     const response = await client.verb.update({
       where: {
         id: verbId,
       },
-      data: { ...data },
+      data: {
+        englishVerb: data.verb,
+        englishSentence: data.sentence,
+
+        // Update Present relation
+        present: {
+          update:
+            data.present?.map((item) => ({
+              where: { id: item.id }, // Use the id of the related Present record
+              data: {
+                germanVerb: item.germanPresentVerb,
+                germanSentence: item.germanPresentSentence,
+                audio: item.audioUrlForPresent,
+              },
+            })) || [],
+        },
+
+        // Update PresentPerfect relation
+        presentPerfect: {
+          update:
+            data.presentPerfect?.map((item) => ({
+              where: { id: item.id }, // Use the id of the related PresentPerfect record
+              data: {
+                germanVerb: item.germanPresentPerfectVerb,
+                germanSentence: item.germanPresentPerfectSentence,
+                audio: item.audioUrlForPresentPerfect,
+              },
+            })) || [],
+        },
+
+        // Update Past relation
+        past: {
+          update:
+            data.past?.map((item) => ({
+              where: { id: item.id }, // Use the id of the related Past record
+              data: {
+                germanVerb: item.germanPastVerb,
+                germanSentence: item.germanPastSentence,
+                audio: item.audioUrlForPast,
+              },
+            })) || [],
+        },
+
+        // Update PastPerfect relation
+        pastPerfect: {
+          update:
+            data.pastPerfect?.map((item) => ({
+              where: { id: item.id }, // Use the id of the related PastPerfect record
+              data: {
+                germanVerb: item.germanPastPerfectVerb,
+                germanSentence: item.germanPastPerfectSentence,
+                audio: item.audioUrlForPastPerfect,
+              },
+            })) || [],
+        },
+
+        // Update Future relation
+        future: {
+          update:
+            data.future?.map((item) => ({
+              where: { id: item.id }, // Use the id of the related Future record
+              data: {
+                germanVerb: item.germanFutureVerb,
+                germanSentence: item.germanFutureSentence,
+                audio: item.audioUrlForFuture,
+              },
+            })) || [],
+        },
+
+        // Update FuturePerfect relation
+        futurePerfect: {
+          update:
+            data.futurePerfect?.map((item) => ({
+              where: { id: item.id }, // Use the id of the related FuturePerfect record
+              data: {
+                germanVerb: item.germanFuturePerfectVerb,
+                germanSentence: item.germanFuturePerfectSentence,
+                audio: item.audioUrlForFuturePerfect,
+              },
+            })) || [],
+        },
+      },
     });
 
-    if (response) {
-      return { status: 200, data: response };
-    } else {
-      return { status: 404, data: "Failed to delete" };
-    }
+    return { status: 200, data: response };
   } catch (error) {
-    console.log(error, "deleteFunction error");
+    console.error(error, "editFunction error");
     return { status: 500, message: "Internal Server error" };
   }
 };
