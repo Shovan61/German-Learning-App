@@ -18,7 +18,6 @@ import axiosInstance from "@/lib/axios";
 import UploadAudio from "./UploadAudio";
 import VerbTable from "./table";
 
-
 export type FieldType = {
   verb: string;
   sentence: string;
@@ -185,6 +184,9 @@ function Main() {
     getListData();
   }, []);
 
+  console.log(audioUrlForPast, '====================');
+  
+
   return (
     <Card className="w-full shadow-xl">
       <div className="flex p-2 justify-end">
@@ -284,6 +286,7 @@ function Main() {
               layout="vertical"
             >
               <UploadAudio
+                tense={"Present"}
                 audioUrl={audioUrlForPresent}
                 setAudioUrl={setAudioUrlForPresent}
               />
@@ -338,6 +341,7 @@ function Main() {
               layout="vertical"
             >
               <UploadAudio
+                tense={"Present Perfect"}
                 audioUrl={audioUrlForPresentPerfect}
                 setAudioUrl={setAudioUrlForPresentPerfect}
               />
@@ -389,6 +393,7 @@ function Main() {
               layout="vertical"
             >
               <UploadAudio
+                tense={"Past"}
                 audioUrl={audioUrlForPast}
                 setAudioUrl={setAudioUrlForPast}
               />
@@ -441,6 +446,7 @@ function Main() {
               layout="vertical"
             >
               <UploadAudio
+                tense={"Past Perfect"}
                 audioUrl={audioUrlForPastPerfect}
                 setAudioUrl={setAudioUrlForPastPerfect}
               />
@@ -492,6 +498,7 @@ function Main() {
               layout="vertical"
             >
               <UploadAudio
+                tense={"Future"}
                 audioUrl={audioUrlForFuture}
                 setAudioUrl={setAudioUrlForFuture}
               />
@@ -546,6 +553,7 @@ function Main() {
               layout="vertical"
             >
               <UploadAudio
+                tense={"Future Perfect"}
                 audioUrl={audioUrlForFuturePerfect}
                 setAudioUrl={setAudioUrlForFuturePerfect}
               />
@@ -568,7 +576,7 @@ function Main() {
           form={form}
           setAudioUrlForPresent={setAudioUrlForPresent}
           setAudioUrlForPresentPerfect={setAudioUrlForPresentPerfect}
-          setAudioUrlForPast={setAudioUrlForPresentPerfect}
+          setAudioUrlForPast={setAudioUrlForPast}
           setAudioUrlForPastPerfect={setAudioUrlForPastPerfect}
           setAudioUrlForFuture={setAudioUrlForFuture}
           setAudioUrlForFuturePerfect={setAudioUrlForFuturePerfect}

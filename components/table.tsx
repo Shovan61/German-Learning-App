@@ -45,7 +45,6 @@ const VerbTable = ({
   };
 
   const cancel: PopconfirmProps["onCancel"] = (e) => {
-    console.log(e);
     setCode("");
   };
 
@@ -92,6 +91,8 @@ const VerbTable = ({
     });
     setAudioUrlForPresent(record.present[0].audio);
     setAudioUrlForPresentPerfect(record.presentPerfect[0].audio);
+    console.log(record.past[0].audio, "record.past[0].audio");
+
     setAudioUrlForPast(record.past[0].audio);
     setAudioUrlForPastPerfect(record.pastPerfect[0].audio);
     setAudioUrlForFuture(record.future[0].audio);

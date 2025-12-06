@@ -8,9 +8,16 @@ const { Dragger } = Upload;
 type UploadAudioProps = {
   audioUrl: string | null;
   setAudioUrl: (audioUrl: string | null) => void;
+  tense:
+    | "Present"
+    | "Past"
+    | "Present Perfect"
+    | "Past Perfect"
+    | "Future"
+    | "Future Perfect";
 };
 
-const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
+const UploadAudio = ({ setAudioUrl, audioUrl, tense }: UploadAudioProps) => {
   const props: UploadProps = {
     name: "file",
     multiple: false,
@@ -52,6 +59,8 @@ const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
     },
   };
 
+  // console.log(audioUrl, tense, "audiourl");
+
   return (
     <div>
       <Dragger {...props} maxCount={1}>
@@ -59,7 +68,7 @@ const UploadAudio = ({ setAudioUrl, audioUrl }: UploadAudioProps) => {
           <InboxOutlined />
         </p>
         <p className="ant-upload-text">
-          Click or drag an MP3 file to this area to upload
+          Click or drag the {tense} MP3 file to this area to upload
         </p>
         <p className="ant-upload-hint">
           Support for a single MP3 file upload only. Please make sure the file
