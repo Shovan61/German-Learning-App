@@ -1,7 +1,48 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { client } from "./prisma";
+
+export type DatabaseFieldType = {
+  verb: string;
+  sentence: string;
+  present?: Array<{
+    id: string;
+    germanPresentVerb: string;
+    germanPresentSentence: string;
+    audioUrlForPresent: string;
+  }>;
+  presentPerfect?: Array<{
+    id: string;
+    germanPresentPerfectVerb: string;
+    germanPresentPerfectSentence: string;
+    audioUrlForPresentPerfect: string;
+  }>;
+  past?: Array<{
+    id: string;
+    germanPastVerb: string;
+    germanPastSentence: string;
+    audioUrlForPast: string;
+  }>;
+  pastPerfect?: Array<{
+    id: string;
+    germanPastPerfectVerb: string;
+    germanPastPerfectSentence: string;
+    audioUrlForPastPerfect: string;
+  }>;
+  future?: Array<{
+    id: string;
+    germanFutureVerb: string;
+    germanFutureSentence: string;
+    audioUrlForFuture: string;
+  }>;
+  futurePerfect?: Array<{
+    id: string;
+    germanFuturePerfectVerb: string;
+    germanFuturePerfectSentence: string;
+    audioUrlForFuturePerfect: string;
+  }>;
+};
+
 
 export const deleteFunction = async (verbId: string) => {
   try {
@@ -22,7 +63,7 @@ export const deleteFunction = async (verbId: string) => {
   }
 };
 
-export const editFunction = async (verbId: string, data: any) => {
+export const editFunction = async (verbId: string, data: DatabaseFieldType) => {
   try {
     // Check if the verb exists
     const verbExists = await client.verb.findUnique({
