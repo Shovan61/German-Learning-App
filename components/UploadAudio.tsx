@@ -59,7 +59,6 @@ const UploadAudio = ({ setAudioUrl, audioUrl, tense }: UploadAudioProps) => {
     },
   };
 
-  // console.log(audioUrl, tense, "audiourl");
 
   return (
     <div>

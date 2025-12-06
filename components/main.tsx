@@ -184,9 +184,6 @@ function Main() {
     getListData();
   }, []);
 
-  console.log(audioUrlForPast, '====================');
-  
-
   return (
     <Card className="w-full shadow-xl">
       <div className="flex p-2 justify-end">
